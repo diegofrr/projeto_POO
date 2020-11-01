@@ -6,15 +6,17 @@ public class Avaliacao {
 	private double interacaoTurma;
 	private double fidelidadeMaterial;
 	private double recomendacao;
+	private String mensagem;
 	private Aluno aluno;
 	private Professor professor;
 	
-	public Avaliacao(double _met, double _qualidMat, double _intTurma, double _fidMaterial, double _recomendacao, Aluno _aluno, Professor _prof) {
+	public Avaliacao(double _met, double _qualidMat, double _intTurma, double _fidMaterial, double _recomendacao, String _mensagem, Aluno _aluno, Professor _prof) {
 		this.metodologiaEnsino = _met;
 		this.qualidadeMateriais = _qualidMat;
 		this.interacaoTurma = _intTurma;
 		this.fidelidadeMaterial = _fidMaterial;
 		this.recomendacao = _recomendacao;
+		this.mensagem = _mensagem;
 		this.aluno = _aluno;
 		this.professor = _prof;
 	}

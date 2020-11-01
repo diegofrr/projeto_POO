@@ -32,7 +32,6 @@ public class Principal {
 							if (_prof == null) {
 								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente.");
 							}else {
-								
 								sistema.avaliarProfessor(_alunoLogado, _prof);
 								
 							}

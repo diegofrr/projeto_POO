@@ -131,8 +131,7 @@ public class Sistema implements Interface {
 	}
 	
 	public void avaliarProfessor(Aluno _aluno, Professor prof) {
-		
-		
+		while(true) {
 		try {
 			
 			JOptionPane.showMessageDialog(null, "Atenção: avalie as perguntas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo");
@@ -140,12 +139,27 @@ public class Sistema implements Interface {
 			double notaQualMateriais = Double.parseDouble(JOptionPane.showInputDialog("Qualidade dos materiais"));
 			double notaInteracaoTurma = Double.parseDouble(JOptionPane.showInputDialog("Interação com a turma"));
 			double notaFidelidadeMaterial = Double.parseDouble(JOptionPane.showInputDialog("Fiderelidade do prof. com o material"));
+			ArrayList<Double> notas = new ArrayList<Double>();
+			notas.add(notaMetodologiaEnsino); 
+			notas.add(notaQualMateriais); 
+			notas.add(notaInteracaoTurma); 
+			notas.add(notaFidelidadeMaterial); 
+			for(double _nota : notas) {
+				if(_nota>10 || _nota<0) {
+					notas.add(null);
+				}
+			}
 			double notaRecomendacao = Double.parseDouble(JOptionPane.showInputDialog("Quanto você recomenda o professor"));
-			Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao,_aluno, prof);
-			
+			String mensagem = JOptionPane.showInputDialog("Deixe um comentário");
+			Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao,mensagem, _aluno, prof);
+			JOptionPane.showMessageDialog(null, "Avaliação feita com sucesso, obrigado!");
+			database.getListaAvaliacoes().add(_avaliacao);
+			break;
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Por favor, digite uma opção válida!");
+			JOptionPane.showMessageDialog(null, "Algo saiu errado! Verifique sua notas aplicadas e tente novamente \n");
+			break;
 			
+		}
 		}
 		
 		
@@ -158,6 +172,13 @@ public class Sistema implements Interface {
 			}
 		}
 		return null;
+	}
+	
+	public boolean testarNota(double nota) {
+		if(nota <= 10) {
+			return true;
+		}
+		return false;
 	}
 	
 
