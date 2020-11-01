@@ -61,7 +61,7 @@ public class Database {
 			
 			
 			///////////TESTE
-			Aluno _aluno = new Aluno("DIEGO", "111", "DIEGO@GMAIL.COM", "222", cursoSI);
+			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123", cursoSI);
 			listaAlunos.add(_aluno);
 			
 		}
