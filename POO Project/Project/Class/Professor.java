@@ -20,6 +20,7 @@ public class Professor extends Pessoa{
 	public Professor() {
 		super();
 		this.listaCursos = new ArrayList<Curso>();
+		this.avaliacao = new ArrayList<Avaliacao>();
 	
 	}
 
@@ -50,7 +51,7 @@ public class Professor extends Pessoa{
 	}
 
 	public ArrayList<Avaliacao> getAvaliacao() {
-		return avaliacao;
+		return this.avaliacao;
 	}
 
 	public void setAvaliacao(ArrayList<Avaliacao> avaliacao) {
@@ -124,7 +125,7 @@ public class Professor extends Pessoa{
 				"Qualidade dos materis: " 		+ this.calculaQualidadeMateriais() 		+	"\n" +
 				"Interação com a turma: " 		+ this.calculaInteracaoTurma() 			+	"\n" +
 				"Fidelidade com o cronograma: " + this.calculaFidelidadeCronograma() 	+	"\n" +
-				"Recomendação do prof."			+ this.calculaRecomendacao() 			+	"\n" +
+				"Recomendação do prof.: "			+ this.calculaRecomendacao() 			+	"\n" +
 				"Médica geral: "				+ this.calculaMediaGeral();				
 	}
 	

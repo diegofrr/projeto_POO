@@ -21,64 +21,70 @@ public class Principal {
 				boolean logou = sistema.login(matricula, senha);
 				if (logou) {
 					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
-					
-					//DEPOIS DO ALUNO LOGAR NO SISTEMA
-					while(true) {
-					String op = menu.menuSecundario();
-					
+
+					// DEPOIS DO ALUNO LOGAR NO SISTEMA
+					while (true) {
+						String op = menu.menuSecundario();
+
 						if (op.equals("1")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
 							if (_prof == null) {
 								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente.");
-							}else {
+							} else {
 								sistema.avaliarProfessor(_alunoLogado, _prof);
-								
+
 							}
-								
-							
-							
+
 						} else if (op.equals("2")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-							if(sistema.profAvaliado(_prof)) {
-								JOptionPane.showMessageDialog(null, _prof.notas());
+
+							if (_prof == null) {
+								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente");
+
+							} else {
+								if (sistema.profAvaliado(_prof)) {
+									JOptionPane.showMessageDialog(null, _prof.notas());
+
+								} else {
+									JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome()
+											+ ", ainda não foi avaliado. Que tal avalia-lo? :)");
+								}
+
 							}
-							JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome() + ", ainda não foi avaliado. Que tal avalia-lo? :)");
-							
-							
+
 						} else if (op.equals("3")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-							if(sistema.profAvaliado(_prof)) {
+							if (sistema.profAvaliado(_prof)) {
 								JOptionPane.showMessageDialog(null, _prof.comentarios());
+								break;
+							} else {
+								JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome()
+										+ ", ainda não foi avaliado. Que tal avalia-lo? :)");
 							}
-							JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome() + ", ainda não foi avaliado. Que tal avalia-lo? :)");	
-							
-							
+
 						} else if (op.equals("4")) {
 							JOptionPane.showMessageDialog(null, sistema.listarProfessores());
 						}
-						
+
 						else if (op.equals("5")) {
 							break;
 						}
 					}
-					
-					
-					
-				}else {
+
+				} else {
 					JOptionPane.showMessageDialog(null, "Falha no login. Tente novamente.");
 				}
 
-			}else if (opcao.equals("2")) {
+			} else if (opcao.equals("2")) {
 				boolean cadastrou = sistema.cadastrarAluno();
-				if(cadastrou) {
+				if (cadastrou) {
 					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
 				}
-				
-				
-			}else {
+
+			} else {
 				break;
 			}
 		}

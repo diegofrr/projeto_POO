@@ -3,6 +3,7 @@ package Database;
 import Class.Aluno;
 import Class.Avaliacao;
 import Class.Curso;
+import Class.Pessoa;
 import Class.Professor;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class Database {
 	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
 	private ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();	
 	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
-		
+
 		public Database() {
 			
 			//CURSOS DISPONÍVEIS NO CAMPUS IV - RIO TINTO

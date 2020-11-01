@@ -96,9 +96,11 @@ public class Sistema implements Interface {
 				
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, "Por favor, digite uma opção válida!");
+				break;
 				
 			}
 		}
+		return null;
 	}
 
 	
