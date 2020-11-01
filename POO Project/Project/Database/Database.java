@@ -1,6 +1,7 @@
 package Database;
 
 import Class.Aluno;
+import Class.Avaliacao;
 import Class.Curso;
 import Class.Professor;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Database {
 	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
 	private ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();	
 	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
-	private ArrayList<Object> comentarios = new ArrayList<Object>();
+	private ArrayList<Object> avaliacao = new ArrayList<Object>();
 		
 		public Database() {
 			
@@ -40,21 +41,22 @@ public class Database {
 			 //PROFESSOR 1:
 			 _cursos.add(cursoSI);
 			 _cursos.add(cursoCC);
-			Professor _professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM", _cursos);
+			Professor _professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM", _cursos, new Avaliacao());
 			listaProfessores.add(_professor1);
 			_cursos.clear();
 			
 			
 			//PROFESSOR 2:
-			 _cursos.add(cursoDesign);
-			Professor _professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM", _cursos);
+			_cursos.add(cursoDesign);
+			Avaliacao _avaliacao2 = new Avaliacao();
+			Professor _professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM", _cursos, new Avaliacao());
 			listaProfessores.add(_professor2);
 			_cursos.clear();
 			
 			
 			//PROFESSOR 3:
 			_cursos.add(cursoDesign);
-			Professor _professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", _cursos);
+			Professor _professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", _cursos, new Avaliacao());
 			listaProfessores.add(_professor3);
 			_cursos.clear();
 			

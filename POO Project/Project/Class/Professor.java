@@ -6,16 +6,23 @@ import javax.swing.JOptionPane;
 
 public class Professor extends Pessoa{
 	private ArrayList<Curso>  listaCursos = new ArrayList<Curso>();
+	private Avaliacao avaliacao;
 	
-	public Professor(String _nome, String _matricula, String _email, ArrayList<Curso> _cursos) {
+	public Professor(String _nome, String _matricula, String _email, ArrayList<Curso> _cursos, Avaliacao _avaliacao) {
 		super(_nome, _matricula, _email);
 		for(Curso _curso : _cursos) {
 			listaCursos.add(_curso);
 		}
+		this.avaliacao = _avaliacao;
+		
 	}
 	
 	public Professor() {
 		super();
+		this.listaCursos = new ArrayList<Curso>();
+		this.avaliacao = new Avaliacao();
+		
+	
 	}
 
 	public ArrayList<Curso> getListaCursos() {
@@ -43,5 +50,15 @@ public class Professor extends Pessoa{
 				+ "E-mail: " + getEmail() + "\n"
 				+ "Curso(s): \n" + listarCursos() ;
 	}
+
+	public Avaliacao getAvaliacao() {
+		return avaliacao;
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		this.avaliacao = avaliacao;
+	}
+
+	
 
 }

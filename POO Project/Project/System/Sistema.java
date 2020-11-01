@@ -4,6 +4,7 @@ package System;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Class.Aluno;
+import Class.Avaliacao;
 import Class.Curso;
 import Class.Professor;
 import Database.Database;
@@ -35,16 +36,21 @@ public class Sistema implements Interface {
 
 	
 //CADASTRA ALUNO
-	public void cadastrarAluno() {
+	public boolean cadastrarAluno() {
 		String nome = JOptionPane.showInputDialog("Nome");
 		String matricula = JOptionPane.showInputDialog("Matrícula");
+		for(Aluno _aluno : database.getListaAlunos()) {
+			if(_aluno.getMatricula().equals(matricula)) {
+				JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema");
+				return false;
+			}
+		}
 		String email = JOptionPane.showInputDialog("E-mail");
 		String senha = JOptionPane.showInputDialog("Senha de acesso");
 		Curso curso = this.escolherCurso();
 		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
-		database.getListaAlunos().add(aluno);
-		JOptionPane.showMessageDialog(null, "Cadastrado concluído!");
-
+		database.getListaAlunos().add(aluno);;
+		return true;
 	}
 	
 	
@@ -122,6 +128,36 @@ public class Sistema implements Interface {
 			}
 		}
 		return false;
+	}
+	
+	public void avaliarProfessor(Aluno _aluno, Professor prof) {
+		
+		
+		try {
+			
+			JOptionPane.showMessageDialog(null, "Atenção: avalie as perguntas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo");
+			double notaMetodologiaEnsino = Double.parseDouble(JOptionPane.showInputDialog("Metodologia de ensino"));
+			double notaQualMateriais = Double.parseDouble(JOptionPane.showInputDialog("Qualidade dos materiais"));
+			double notaInteracaoTurma = Double.parseDouble(JOptionPane.showInputDialog("Interação com a turma"));
+			double notaFidelidadeMaterial = Double.parseDouble(JOptionPane.showInputDialog("Fiderelidade do prof. com o material"));
+			double notaRecomendacao = Double.parseDouble(JOptionPane.showInputDialog("Quanto você recomenda o professor"));
+			Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao,_aluno, prof);
+			
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Por favor, digite uma opção válida!");
+			
+		}
+		
+		
+	}
+	
+	public Aluno alunoLogado(String matricula) {
+		for(Aluno _aluno : database.getListaAlunos()) {
+			if(_aluno.getMatricula().equals(matricula)) {
+				return _aluno;
+			}
+		}
+		return null;
 	}
 	
 
