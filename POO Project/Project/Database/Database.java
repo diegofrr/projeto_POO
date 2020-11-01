@@ -11,6 +11,7 @@ public class Database {
 	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
 	private ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();	
 	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
+	private ArrayList<Object> comentarios = new ArrayList<Object>();
 		
 		public Database() {
 			
@@ -22,6 +23,8 @@ public class Database {
 			Curso cursoEcologia 		= 	new Curso("ECOLOGIA" 				, 	"5555555"); listaCursos.add(cursoEcologia);
 			Curso cursoMatematica 		=	new Curso("MATEMÁTICA" 				, 	"6666666"); listaCursos.add(cursoMatematica);
 			Curso cursoAntropologia 	= 	new Curso("ANTROPOLOGIA" 			, 	"7777777"); listaCursos.add(cursoAntropologia);
+			
+
 			
 			
 			
@@ -54,7 +57,11 @@ public class Database {
 			Professor _professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", _cursos);
 			listaProfessores.add(_professor3);
 			_cursos.clear();
-				
+			
+			
+			///////////TESTE
+			Aluno _aluno = new Aluno("DIEGO", "111", "DIEGO@GMAIL.COM", "222", cursoSI);
+			listaAlunos.add(_aluno);
 			
 		}
 	

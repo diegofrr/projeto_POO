@@ -43,6 +43,7 @@ public class Sistema implements Interface {
 		Curso curso = this.escolherCurso();
 		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
 		database.getListaAlunos().add(aluno);
+		JOptionPane.showMessageDialog(null, "Cadastrado concluído!");
 
 	}
 	
@@ -71,10 +72,15 @@ public class Sistema implements Interface {
 			listaProfEncontrados += cont++ +". " + _professor.toString() + "\n\n";
 			
 		}
-		if(profEncontrados.size() == 1) {
+		if(profEncontrados.size() == 0) {
+			return null;
+		}
+		
+		else if(profEncontrados.size() == 1) {
 			JOptionPane.showMessageDialog(null, "1 professor encontrado \n\n" + listaProfEncontrados);
 			return profEncontrados.get(0);
 		}
+		
 		while(true) {
 			try {
 				
@@ -89,10 +95,15 @@ public class Sistema implements Interface {
 	}
 
 
-	@Override
+	//PROCURAR PROFESSOR PELA MATRICULA
 	public Professor procurarProfessorPelaMatricula(String matricula) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Professor> professores = database.getListaProfessores();
+		String lista = "";
+		for(Professor _prof : professores) {
+			if(_prof.getMatricula().equals(matricula)) {
+				return _prof;
+			}
+		}return null;
 	}
 	
 	public String listarProfessores() {
