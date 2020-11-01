@@ -146,6 +146,7 @@ public class Sistema implements Interface {
 			notas.add(notaFidelidadeMaterial); 
 			for(double _nota : notas) {
 				if(_nota>10 || _nota<0) {
+					//CHAMADA DE ERRO
 					notas.add(null);
 				}
 			}
@@ -195,6 +196,12 @@ public class Sistema implements Interface {
 	}
 	
 
+	public boolean profAvaliado(Professor _prof) {
+		if(_prof.getAvaliacao().size() == 0) {
+			return false;
+		}
+		return true;
+	}
 	
 
 }

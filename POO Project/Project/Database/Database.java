@@ -24,12 +24,6 @@ public class Database {
 			Curso cursoMatematica 		=	new Curso("MATEMÁTICA" 				, 	"6666666"); listaCursos.add(cursoMatematica);
 			Curso cursoAntropologia 	= 	new Curso("ANTROPOLOGIA" 			, 	"7777777"); listaCursos.add(cursoAntropologia);
 			
-
-			
-			
-			
-			
-			
 			 ArrayList<Curso> _cursos = new ArrayList<Curso>();	
 			 
 			 /*CRIANDO PROFESSORES:

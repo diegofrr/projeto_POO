@@ -41,16 +41,26 @@ public class Principal {
 						} else if (op.equals("2")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-							JOptionPane.showMessageDialog(null, _prof.notas());
+							if(sistema.profAvaliado(_prof)) {
+								JOptionPane.showMessageDialog(null, _prof.notas());
+							}
+							JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome() + ", ainda não foi avaliado. Que tal avalia-lo? :)");
+							
 							
 						} else if (op.equals("3")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-							JOptionPane.showMessageDialog(null, _prof.comentarios());
-							
+							if(sistema.profAvaliado(_prof)) {
+								JOptionPane.showMessageDialog(null, _prof.comentarios());
+							}
+							JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome() + ", ainda não foi avaliado. Que tal avalia-lo? :)");	
 							
 							
 						} else if (op.equals("4")) {
+							JOptionPane.showMessageDialog(null, sistema.listarProfessores());
+						}
+						
+						else if (op.equals("5")) {
 							break;
 						}
 					}
