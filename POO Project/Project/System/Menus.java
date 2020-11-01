@@ -24,7 +24,7 @@ public class Menus {
 		String opcao = JOptionPane.showInputDialog(	"DIGITE UM OPÇÃO \n"+
 													"1. AVALIAR PROFESSOR \n"+
 													"2. VER ESTATÍSTICAS DE UM PROFESSOR \n"+
-													"3. LISTAR PROFESSORES \n"+
+													"3. VER COMENTÁRIOS DE UM PROFESSOR \n"+
 													"4. SAIR");
 
 		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3") || opcao.equals("4") || opcao.equals("5")) {

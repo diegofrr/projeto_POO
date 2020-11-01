@@ -41,8 +41,14 @@ public class Principal {
 						} else if (op.equals("2")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
+							JOptionPane.showMessageDialog(null, _prof.notas());
 							
 						} else if (op.equals("3")) {
+							String nome = JOptionPane.showInputDialog("Nome do professor");
+							Professor _prof = sistema.procurarProfessorPeloNome(nome);
+							JOptionPane.showMessageDialog(null, _prof.comentarios());
+							
+							
 							
 						} else if (op.equals("4")) {
 							break;

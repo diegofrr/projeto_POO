@@ -127,8 +127,13 @@ public class Sistema implements Interface {
 	//ALUNO FAZ AVALIAÇÃO DE UM DETERMINADO PROFESSOR
 	public void avaliarProfessor(Aluno _aluno, Professor prof) {
 		while(true) {
+		boolean avaliou = this.verificaAvaliou(_aluno.getMatricula(), prof);
+		if(avaliou) {
+			JOptionPane.showMessageDialog(null, "Você já avaliou este professor!");
+			break;
+		}
+	
 		try {
-			
 			JOptionPane.showMessageDialog(null, "Atenção: avalie as perguntas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo");
 			double notaMetodologiaEnsino = Double.parseDouble(JOptionPane.showInputDialog("Metodologia de ensino"));
 			double notaQualMateriais = Double.parseDouble(JOptionPane.showInputDialog("Qualidade dos materiais"));
@@ -170,6 +175,7 @@ public class Sistema implements Interface {
 		return null;
 	}
 	
+	//VERIFICA SE A NOTA ATRIBUIDA É MAIOR QUE 0 E MENOS QUE 10
 	//VERIFICA SE A NOTA ATRIBUÍDA ESTÁ ENTRE 0 E 10
 	public boolean testarNota(double nota) {
 		if(nota <= 10) {
@@ -177,6 +183,18 @@ public class Sistema implements Interface {
 		}
 		return false;
 	}
+	
+	//VERIFICA SE ALUNO JA AVALIOU UM PROFESSOR
+	public boolean verificaAvaliou(String matricula, Professor prof) {
+		for(Avaliacao _avaliacao : prof.getAvaliacao()) {
+			if(_avaliacao.getAluno().getMatricula().equals(matricula)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
 	
 
 }

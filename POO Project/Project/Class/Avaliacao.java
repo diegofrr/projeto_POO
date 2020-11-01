@@ -4,17 +4,17 @@ public class Avaliacao {
 	private double metodologiaEnsino;
 	private double qualidadeMateriais;
 	private double interacaoTurma;
-	private double fidelidadeMaterial;
+	private double fidelidadeCronograma;
 	private double recomendacao;
 	private String mensagem;
 	private Aluno aluno;
 	private Professor professor;
 	
-	public Avaliacao(double _met, double _qualidMat, double _intTurma, double _fidMaterial, double _recomendacao, String _mensagem, Aluno _aluno, Professor _prof) {
+	public Avaliacao(double _met, double _qualidMat, double _intTurma, double _fidCronograma, double _recomendacao, String _mensagem, Aluno _aluno, Professor _prof) {
 		this.metodologiaEnsino = _met;
 		this.qualidadeMateriais = _qualidMat;
 		this.interacaoTurma = _intTurma;
-		this.fidelidadeMaterial = _fidMaterial;
+		this.fidelidadeCronograma = _fidCronograma;
 		this.recomendacao = _recomendacao;
 		this.mensagem = _mensagem;
 		this.aluno = _aluno;
@@ -25,8 +25,9 @@ public class Avaliacao {
 		this.metodologiaEnsino = 0;
 		this.qualidadeMateriais = 0;
 		this.interacaoTurma = 0;
-		this.fidelidadeMaterial = 0;
+		this.fidelidadeCronograma = 0;
 		this.recomendacao = 0;
+		this.mensagem = "";
 		this.aluno = new Aluno();
 		this.professor = new Professor();
 	}
@@ -69,14 +70,14 @@ public class Avaliacao {
 
 
 
-	public double getFidelidadeMaterial() {
-		return fidelidadeMaterial;
+	public double getFidelidadeCronograma() {
+		return fidelidadeCronograma;
 	}
 
 
 
-	public void setFidelidadeMaterial(double fidelidadeMaterial) {
-		this.fidelidadeMaterial = fidelidadeMaterial;
+	public void setFidelidadeCronograma(double fidCronograma) {
+		this.fidelidadeCronograma = fidCronograma;
 	}
 
 
@@ -114,15 +115,13 @@ public class Avaliacao {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
-	
-	
-	public String toString() {
-		return 	"Notas \n" +
-				"Metodologia de ensino ";
+
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 	
-	
-	
-	
-
 }

@@ -88,6 +88,17 @@ public class Professor extends Pessoa{
 	}
 
 
+	public double calculaFidelidadeCronograma() {
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		int quantAvaliacoes = _avaliacao.size();
+		double avaliacaoGeral = 0;
+		for(Avaliacao av : _avaliacao) {
+			avaliacaoGeral += av.getFidelidadeCronograma();
+		}
+		return avaliacaoGeral / quantAvaliacoes;
+		
+	}
+	
 	public double calculaRecomendacao() {
 		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
 		int quantAvaliacoes = _avaliacao.size();
@@ -99,12 +110,31 @@ public class Professor extends Pessoa{
 	}
 	
 	public double calculaMediaGeral() {
-		return (this.calculaMetodologiaEnsino() 
-				+ this.calculaInteracaoTurma() 
-				+ this.calculaQualidadeMateriais() 
-				+ this.calculaRecomendacao())
-				/ 4;
-		
+		return 		(	this.calculaMetodologiaEnsino()
+				+ 		this.calculaQualidadeMateriais()
+				+ 		this.calculaInteracaoTurma()
+				+		this.calculaFidelidadeCronograma() 
+				+ 		this.calculaRecomendacao()) / 5;
+	}
+	
+	
+	public String notas() {
+		return	"Médias \n" +
+				"Metodologia de ensino: " 		+ this.calculaMetodologiaEnsino() 		+ 	"\n" +
+				"Qualidade dos materis: " 		+ this.calculaQualidadeMateriais() 		+	"\n" +
+				"Interação com a turma: " 		+ this.calculaInteracaoTurma() 			+	"\n" +
+				"Fidelidade com o cronograma: " + this.calculaFidelidadeCronograma() 	+	"\n" +
+				"Recomendação do prof."			+ this.calculaRecomendacao() 			+	"\n" +
+				"Médica geral: "				+ this.calculaMediaGeral();				
+	}
+	
+	public String comentarios() {
+		String lista = "";
+		for(Avaliacao _avaliacao : getAvaliacao()) {
+			lista += "Autor: " + _avaliacao.getAluno().getNome() + " (" + _avaliacao.getAluno().getMatricula() + ")\n"
+					+ "- " + _avaliacao.getMensagem() + "\n\n";
+		}
+		return lista;
 	}
 
 }
