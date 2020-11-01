@@ -40,7 +40,7 @@ public class Avaliacao {
 
 
 	public void setQualidadeMateriais(double qualidadeMateriais) {
-		this.qualidadeMateriais += qualidadeMateriais;
+		this.qualidadeMateriais = qualidadeMateriais;
 	}
 
 
@@ -52,7 +52,7 @@ public class Avaliacao {
 
 
 	public void setMetodologiaEnsino(double metodologiaEnsino) {
-		this.metodologiaEnsino += metodologiaEnsino;
+		this.metodologiaEnsino = metodologiaEnsino;
 	}
 
 
@@ -64,7 +64,7 @@ public class Avaliacao {
 
 
 	public void setInteracaoTurma(double interacaoTurma) {
-		this.interacaoTurma += interacaoTurma;
+		this.interacaoTurma = interacaoTurma;
 	}
 
 
@@ -76,7 +76,7 @@ public class Avaliacao {
 
 
 	public void setFidelidadeMaterial(double fidelidadeMaterial) {
-		this.fidelidadeMaterial += fidelidadeMaterial;
+		this.fidelidadeMaterial = fidelidadeMaterial;
 	}
 
 
@@ -115,6 +115,11 @@ public class Avaliacao {
 		this.professor = professor;
 	}
 	
+	
+	public String toString() {
+		return 	"Notas \n" +
+				"Metodologia de ensino ";
+	}
 	
 	
 	

@@ -12,7 +12,6 @@ public class Database {
 	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
 	private ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();	
 	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
-	private ArrayList<Avaliacao> listaAvaliacoes = new ArrayList<Avaliacao>();
 		
 		public Database() {
 			
@@ -98,15 +97,5 @@ public class Database {
 		public void setListaCursos(ArrayList<Curso> listaCursos) {
 			this.listaCursos = listaCursos;
 		}
-
-		public ArrayList<Avaliacao> getListaAvaliacoes() {
-			return listaAvaliacoes;
-		}
-
-		public void setListaAvaliacoes(ArrayList<Avaliacao> listaAvaliacoes) {
-			this.listaAvaliacoes = listaAvaliacoes;
-		}
-
-
 
 }

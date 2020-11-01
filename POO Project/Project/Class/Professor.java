@@ -20,8 +20,6 @@ public class Professor extends Pessoa{
 	public Professor() {
 		super();
 		this.listaCursos = new ArrayList<Curso>();
-
-		
 	
 	}
 
@@ -58,7 +56,55 @@ public class Professor extends Pessoa{
 	public void setAvaliacao(ArrayList<Avaliacao> avaliacao) {
 		this.avaliacao = avaliacao;
 	}
-
 	
+	public double calculaMetodologiaEnsino() {
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		int quantAvaliacoes = _avaliacao.size();
+		double avaliacaoGeral = 0;
+		for(Avaliacao av : _avaliacao) {
+			avaliacaoGeral += av.getMetodologiaEnsino();
+		}
+		return avaliacaoGeral / quantAvaliacoes;
+	}
+
+	public double calculaQualidadeMateriais() {
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		int quantAvaliacoes = _avaliacao.size();
+		double avaliacaoGeral = 0;
+		for(Avaliacao av : _avaliacao) {
+			avaliacaoGeral += av.getQualidadeMateriais();
+		}
+		return avaliacaoGeral / quantAvaliacoes;
+	}
+	
+	public double calculaInteracaoTurma() {
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		int quantAvaliacoes = _avaliacao.size();
+		double avaliacaoGeral = 0;
+		for(Avaliacao av : _avaliacao) {
+			avaliacaoGeral += av.getInteracaoTurma();
+		}
+		return avaliacaoGeral / quantAvaliacoes;
+	}
+
+
+	public double calculaRecomendacao() {
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		int quantAvaliacoes = _avaliacao.size();
+		double avaliacaoGeral = 0;
+		for(Avaliacao av : _avaliacao) {
+			avaliacaoGeral += av.getRecomendacao();
+		}
+		return avaliacaoGeral / quantAvaliacoes;
+	}
+	
+	public double calculaMediaGeral() {
+		return (this.calculaMetodologiaEnsino() 
+				+ this.calculaInteracaoTurma() 
+				+ this.calculaQualidadeMateriais() 
+				+ this.calculaRecomendacao())
+				/ 4;
+		
+	}
 
 }

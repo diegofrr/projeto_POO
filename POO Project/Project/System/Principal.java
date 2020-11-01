@@ -35,10 +35,12 @@ public class Principal {
 								sistema.avaliarProfessor(_alunoLogado, _prof);
 								
 							}
-							
+								
 							
 							
 						} else if (op.equals("2")) {
+							String nome = JOptionPane.showInputDialog("Nome do professor");
+							Professor _prof = sistema.procurarProfessorPeloNome(nome);
 							
 						} else if (op.equals("3")) {
 							

@@ -13,6 +13,7 @@ import Interface.Interface;
 public class Sistema implements Interface {
 	Database database = new Database();
 
+	//ESCOLHE UM CURSO DISPONÍVEL
 	public Curso escolherCurso() {
 		String listaCursosStr = "";
 		int cont = 1;
@@ -35,7 +36,7 @@ public class Sistema implements Interface {
 		}
 
 	
-//CADASTRA ALUNO
+	//CADASTRA ALUNO
 	public boolean cadastrarAluno() {
 		String nome = JOptionPane.showInputDialog("Nome");
 		String matricula = JOptionPane.showInputDialog("Matrícula");
@@ -54,7 +55,7 @@ public class Sistema implements Interface {
 	}
 	
 	
-//LISTAR ALUNOS
+	//LISTAR ALUNOS
 	public String listarAlunos() {
 		String lista = "";
 		for(Aluno _aluno : database.getListaAlunos()) {
@@ -64,7 +65,7 @@ public class Sistema implements Interface {
 	}
 	
 	
-	
+	//PROCURA UM PROFESSOR PELO NOME
 	public Professor procurarProfessorPeloNome(String nome) {
 		ArrayList<Professor> profEncontrados = new ArrayList<Professor>();
 		for(Professor _prof : database.getListaProfessores()) {
@@ -100,18 +101,8 @@ public class Sistema implements Interface {
 		}
 	}
 
-
-	//PROCURAR PROFESSOR PELA MATRICULA
-	public Professor procurarProfessorPelaMatricula(String matricula) {
-		ArrayList<Professor> professores = database.getListaProfessores();
-		String lista = "";
-		for(Professor _prof : professores) {
-			if(_prof.getMatricula().equals(matricula)) {
-				return _prof;
-			}
-		}return null;
-	}
 	
+	//LISTAR OS PROFESSORES
 	public String listarProfessores() {
 		ArrayList<Professor> professores = database.getListaProfessores();
 		String lista = "";
@@ -121,6 +112,8 @@ public class Sistema implements Interface {
 		return lista;
 	}
 	
+	
+	//TESTA SE EXISTE LOGIN NO BANCO DE DAOS
 	public boolean login(String matricula, String senha) {
 		for(Aluno _aluno : database.getListaAlunos()) {
 			if(_aluno.getMatricula().equals(matricula) && _aluno.getSenha().equals(senha)) {
@@ -130,6 +123,8 @@ public class Sistema implements Interface {
 		return false;
 	}
 	
+	
+	//ALUNO FAZ AVALIAÇÃO DE UM DETERMINADO PROFESSOR
 	public void avaliarProfessor(Aluno _aluno, Professor prof) {
 		while(true) {
 		try {
@@ -153,7 +148,7 @@ public class Sistema implements Interface {
 			String mensagem = JOptionPane.showInputDialog("Deixe um comentário");
 			Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao,mensagem, _aluno, prof);
 			JOptionPane.showMessageDialog(null, "Avaliação feita com sucesso, obrigado!");
-			database.getListaAvaliacoes().add(_avaliacao);
+			prof.getAvaliacao().add(_avaliacao);
 			break;
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "Algo saiu errado! Verifique sua notas aplicadas e tente novamente \n");
@@ -165,6 +160,7 @@ public class Sistema implements Interface {
 		
 	}
 	
+	//VOLTA UM TIPO ALUNO (ALUNO LOGADO NO SISTEMA)
 	public Aluno alunoLogado(String matricula) {
 		for(Aluno _aluno : database.getListaAlunos()) {
 			if(_aluno.getMatricula().equals(matricula)) {
@@ -174,6 +170,7 @@ public class Sistema implements Interface {
 		return null;
 	}
 	
+	//VERIFICA SE A NOTA ATRIBUÍDA ESTÁ ENTRE 0 E 10
 	public boolean testarNota(double nota) {
 		if(nota <= 10) {
 			return true;
