@@ -56,13 +56,20 @@ public class Database implements InterfaceDatabase {
 			listaProfessores.add(_professor3);
 			
 			//PROFESSOR 4:
-
 			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM");
 			_professor4.getListaCursos().add(cursoAntropologia);
 			_professor4.getListaCursos().add(cursoMatematica);
 			cursoAntropologia.adicionarProfessor(_professor4);
 			cursoMatematica.adicionarProfessor(_professor4);
 			listaProfessores.add(_professor4);
+			
+			//PROFESSOR 5:
+			Professor _professor5 = new Professor("PROFESSOR5", "5555555", "PROFESSOR5@GMAIL.COM");
+			_professor4.getListaCursos().add(cursoMatematica);
+			cursoMatematica.adicionarProfessor(_professor5);
+			listaProfessores.add(_professor4);
+			
+			
 			
 			
 			///////////TESTE
