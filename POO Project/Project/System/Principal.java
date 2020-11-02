@@ -3,7 +3,9 @@ package System;
 import javax.swing.JOptionPane;
 
 import Class.Aluno;
+import Class.Curso;
 import Class.Professor;
+import Database.Database;
 
 public class Principal {
 
@@ -20,11 +22,11 @@ public class Principal {
 				Aluno _alunoLogado = sistema.alunoLogado(matricula);
 				boolean logou = sistema.login(matricula, senha);
 				if (logou) {
-					JOptionPane.showMessageDialog(null, "Login efetuado com sucesso!");
+					JOptionPane.showMessageDialog(null, "Bem vindo, " + _alunoLogado.getNome() + "!");
 
 					// DEPOIS DO ALUNO LOGAR NO SISTEMA
 					while (true) {
-						String op = menu.menuSecundario();
+						String op = menu.menuSecundario(_alunoLogado);
 
 						if (op.equals("1")) {
 							String nome = JOptionPane.showInputDialog("Nome do professor");
@@ -66,10 +68,26 @@ public class Principal {
 							}
 
 						} else if (op.equals("4")) {
-							JOptionPane.showMessageDialog(null, sistema.listarProfessores());
-						}
-
-						else if (op.equals("5")) {
+							Curso _cursoAcessado = sistema.escolherCurso();
+							if (_cursoAcessado == null) continue;
+							String opcaoCurso = menu.menuAcessarCurso(_cursoAcessado);
+							if(opcaoCurso.equals("1")) {
+								JOptionPane.showMessageDialog(null, sistema.database.listarProfessoresDeCurso(_cursoAcessado));
+								
+							}else if(opcaoCurso.equals("2")) {
+								JOptionPane.showMessageDialog(null, sistema.database.listarAlunosDeCurso(_cursoAcessado));
+								
+							}
+							
+						} else if (op.equals("5")) {
+							JOptionPane.showMessageDialog(null, sistema.database.listarProfessores());
+							
+							
+						} else if (op.equals("6")) {
+							JOptionPane.showMessageDialog(null, sistema.database.listarCursos());
+							
+							
+						} else if (op.equals("7")){
 							break;
 						}
 					}

@@ -8,9 +8,7 @@ public interface Interface {
 	
 	public Curso escolherCurso();
 	public boolean cadastrarAluno();
-	public String listarAlunos();
 	public Professor procurarProfessorPeloNome(String nome);
-	public String listarProfessores();
 	public boolean login(String matricula, String senha);
 	public void avaliarProfessor(Aluno _aluno, Professor prof);
 	public Aluno alunoLogado(String matricula);

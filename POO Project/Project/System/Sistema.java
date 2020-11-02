@@ -13,6 +13,14 @@ import Interface.Interface;
 public class Sistema implements Interface {
 	Database database = new Database();
 
+	
+	
+	public static final String NOME_INVALIDO = "Nome inválido!";
+	public static final String MATRICULA_INVALIDA = "Matrícula inválida!";
+	public static final String EMAIL_INVALIDO = "E-mail inválido!";
+	public static final String SENHA_INVALIDA = "Senha inválida! Por favor, não utilize espaços.";
+	
+	
 	//ESCOLHE UM CURSO DISPONÍVEL
 	public Curso escolherCurso() {
 		String listaCursosStr = "";
@@ -22,10 +30,12 @@ public class Sistema implements Interface {
 		for (Curso _curso : listaCursos) {
 			listaCursosStr += cont++ + ". " + _curso.getNome() + "\n";
 		}
+		listaCursosStr += cont + ". SAIR";
 		while(true) {
 			try {
 				
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog("Escolha um curso:" + "\n" + listaCursosStr));
+				int opcao = Integer.parseInt(JOptionPane.showInputDialog(listaCursosStr));
+				if (opcao == (listaCursos.size() + 1)) return null;
 				return listaCursos.get(opcao-1);
 				
 			} catch (Exception ex) {
@@ -38,19 +48,30 @@ public class Sistema implements Interface {
 	
 	//CADASTRA ALUNO
 	public boolean cadastrarAluno() {
-		String nome = JOptionPane.showInputDialog("Nome");
-		String matricula = JOptionPane.showInputDialog("Matrícula");
+		String nome = JOptionPane.showInputDialog("Nome").trim().replaceAll("( +)", " ");
+		if (nome.equals("")) {JOptionPane.showMessageDialog(null, NOME_INVALIDO);  return false;}
+		
+		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
+		if(matricula.equals("")) {JOptionPane.showMessageDialog(null, MATRICULA_INVALIDA); return false;}
+		
+		// verifica se já existe uma mesma matrícula cadastrada
 		for(Aluno _aluno : database.getListaAlunos()) {
 			if(_aluno.getMatricula().equals(matricula)) {
 				JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema");
 				return false;
 			}
 		}
-		String email = JOptionPane.showInputDialog("E-mail");
-		String senha = JOptionPane.showInputDialog("Senha de acesso");
+		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "");
+		if (email.equals("")) {JOptionPane.showMessageDialog(null, EMAIL_INVALIDO); return false;}
+		
+		String senha = JOptionPane.showInputDialog("Senha de acesso (não use espaços)");
+		String _senha = senha.trim().replaceAll("( +)", "");
+		if (!senha.equals(_senha)) {JOptionPane.showMessageDialog(null, SENHA_INVALIDA); return false;}
+		
 		Curso curso = this.escolherCurso();
 		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
-		database.getListaAlunos().add(aluno);;
+		database.getListaAlunos().add(aluno);
+		curso.adicionarAluno(aluno);
 		return true;
 	}
 	
@@ -100,17 +121,6 @@ public class Sistema implements Interface {
 		}
 	}
 
-	
-	//LISTAR OS PROFESSORES
-	public String listarProfessores() {
-		ArrayList<Professor> professores = database.getListaProfessores();
-		String lista = "";
-		for(Professor _prof : professores) {
-			lista += _prof.toString() + "\n\n";
-		}
-		return lista;
-	}
-	
 	
 	//TESTA SE EXISTE LOGIN NO BANCO DE DAOS
 	public boolean login(String matricula, String senha) {
@@ -219,6 +229,5 @@ public class Sistema implements Interface {
 		}
 		return true;
 	}
-	
 
 }
