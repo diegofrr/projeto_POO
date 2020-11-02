@@ -4,8 +4,9 @@ import javax.swing.JOptionPane;
 
 import Class.Aluno;
 import Class.Curso;
+import Interfaces.InterfaceMenus;
 
-public class Menus {
+public class Menus implements InterfaceMenus {
 	
 	
 	public String menuPrincipal() {
