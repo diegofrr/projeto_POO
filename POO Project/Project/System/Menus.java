@@ -46,7 +46,7 @@ public class Menus implements InterfaceMenus {
 	
 	public String menuAcessarCurso(Curso _cursoAcessado) {
 		while(true) {
-			String opcao = JOptionPane.showInputDialog(	"Curso: " + _cursoAcessado.getNome() + " \n" +
+			String opcao = JOptionPane.showInputDialog(	"Curso: " + _cursoAcessado.getNome() + " \n\n" +
 														"1. LISTAR PROFESSORES \n"+
 														"2. LISTAR ALUNOS \n" +
 														"3. VOLTAR AO MENU PRINCIPAL");

@@ -33,7 +33,7 @@ public class Sistema implements InterfaceSistema {
 		while(true) {
 			try {
 				
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog(listaCursosStr));
+				int opcao = Integer.parseInt(JOptionPane.showInputDialog("Selecione o curso \n\n" + listaCursosStr));
 				if (opcao == (listaCursos.size() + 1)) return null;
 				return listaCursos.get(opcao-1);
 				

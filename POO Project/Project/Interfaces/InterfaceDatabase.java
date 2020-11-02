@@ -4,6 +4,7 @@ import Class.Curso;
 
 public interface InterfaceDatabase {
 
+	// Não adicionado os métodos get's e set's
 	public String listarAlunosDeCurso(Curso _curso);
 	public String listarProfessoresDeCurso(Curso _curso);
 	public String listarCursos();

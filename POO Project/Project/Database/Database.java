@@ -39,7 +39,7 @@ public class Database implements InterfaceDatabase {
 			_professor1.getListaCursos().add(cursoSI);
 			_professor1.getListaCursos().add(cursoCC);
 			cursoSI.adicionarProfessor(_professor1);
-			cursoSI.adicionarProfessor(_professor1);
+			cursoCC.adicionarProfessor(_professor1);
 			listaProfessores.add(_professor1);
 			
 			//PROFESSOR 2:
