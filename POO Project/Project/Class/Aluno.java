@@ -5,16 +5,14 @@ public class Aluno extends Pessoa {
 	private Curso curso;
 	private String senha;
 	
-	public Aluno(String _nome, String _matricula, String _email, String _senha, Curso _curso) {
+	public Aluno(String _nome, String _matricula, String _email, String _senha) {
 		super(_nome, _matricula, _email);
 		this.senha = _senha;
-		this.curso = _curso;
 	}
 	
 	public Aluno() {
 		super();
-		Curso _curso = new Curso();
-		this.curso = _curso;
+		this.senha = "";
 	}
 	
 	public String getSenha() {
@@ -23,7 +21,6 @@ public class Aluno extends Pessoa {
 	public void setSenha(String _senha) {
 		this.senha = _senha;
 	}
-
 	
 	public Curso getCurso() {
 		return curso;

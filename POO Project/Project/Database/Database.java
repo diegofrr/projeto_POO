@@ -33,46 +33,41 @@ public class Database {
 			  */
 			 
 			 //PROFESSOR 1:
-			 _cursos.add(cursoSI);
-			 _cursos.add(cursoCC);
-			Professor _professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM", _cursos, new ArrayList<Avaliacao>());
+			Professor _professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM");
+			_professor1.getListaCursos().add(cursoSI);
+			_professor1.getListaCursos().add(cursoCC);
+			cursoSI.adicionarProfessor(_professor1);
+			cursoSI.adicionarProfessor(_professor1);
 			listaProfessores.add(_professor1);
-			cursoSI.adicionarProfessor(_professor1);
-			cursoSI.adicionarProfessor(_professor1);
-			_cursos.clear();
-			
 			
 			//PROFESSOR 2:
-			_cursos.add(cursoDesign);
-			Avaliacao _avaliacao2 = new Avaliacao();
-			Professor _professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM", _cursos, new ArrayList<Avaliacao>());
-			listaProfessores.add(_professor2);
+			Professor _professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM");
+			_professor2.getListaCursos().add(cursoDesign);
 			cursoDesign.adicionarProfessor(_professor2);
-			_cursos.clear();
+			listaProfessores.add(_professor2);
 			
 			
 			//PROFESSOR 3:
-			_cursos.add(cursoDesign);
-			Professor _professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", _cursos, new ArrayList<Avaliacao>());
-			listaProfessores.add(_professor3);
+			Professor _professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM");
+			_professor3.getListaCursos().add(cursoDesign);
 			cursoDesign.adicionarProfessor(_professor3);
-			_cursos.clear();
-			
+			listaProfessores.add(_professor3);
 			
 			//PROFESSOR 4:
-			_cursos.add(cursoAntropologia);
-			_cursos.add(cursoMatematica);
-			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM", _cursos, new ArrayList<Avaliacao>());
-			listaProfessores.add(_professor4);
+
+			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM");
+			_professor4.getListaCursos().add(cursoAntropologia);
+			_professor4.getListaCursos().add(cursoMatematica);
 			cursoAntropologia.adicionarProfessor(_professor4);
 			cursoMatematica.adicionarProfessor(_professor4);
-			_cursos.clear();
+			listaProfessores.add(_professor4);
 			
 			
 			///////////TESTE
-			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123", cursoSI);
-			listaAlunos.add(_aluno);
+			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123");
+			_aluno.setCurso(cursoSI);
 			cursoSI.adicionarAluno(_aluno);
+			listaAlunos.add(_aluno);
 			
 		}
 	

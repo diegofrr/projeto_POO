@@ -69,7 +69,8 @@ public class Sistema implements Interface {
 		if (!senha.equals(_senha)) {JOptionPane.showMessageDialog(null, SENHA_INVALIDA); return false;}
 		
 		Curso curso = this.escolherCurso();
-		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
+		Aluno aluno = new Aluno(nome, matricula, email, senha);
+		aluno.setCurso(curso);
 		database.getListaAlunos().add(aluno);
 		curso.adicionarAluno(aluno);
 		return true;

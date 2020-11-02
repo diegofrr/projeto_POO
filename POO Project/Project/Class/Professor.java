@@ -6,14 +6,10 @@ import javax.swing.JOptionPane;
 
 public class Professor extends Pessoa{
 	private ArrayList<Curso>  listaCursos = new ArrayList<Curso>();
-	private ArrayList<Avaliacao> avaliacao;
+	private ArrayList<Avaliacao> avaliacao = new ArrayList<Avaliacao>();
 	
-	public Professor(String _nome, String _matricula, String _email, ArrayList<Curso> _cursos, ArrayList<Avaliacao> _avaliacao) {
+	public Professor(String _nome, String _matricula, String _email) {
 		super(_nome, _matricula, _email);
-		for(Curso _curso : _cursos) {
-			listaCursos.add(_curso);
-		}
-		this.avaliacao = _avaliacao;
 		
 	}
 	
