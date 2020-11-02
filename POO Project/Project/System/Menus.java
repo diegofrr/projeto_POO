@@ -33,9 +33,10 @@ public class Menus implements InterfaceMenus {
 													"4. ACESSAR CURSO \n" +
 													"5. LISTAR PROFESSORES \n" +
 													"6. LISTAR CURSOS \n"+
-													"7. ENCERRAR SESSÃO");
+													"7. RANKING DOS PROFESSORES \n" +
+													"8. ENCERRAR SESSÃO");
 
-		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3") || opcao.equals("4") || opcao.equals("5") || opcao.equals("6") || opcao.equals("7")) {
+		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3") || opcao.equals("4") || opcao.equals("5") || opcao.equals("6") || opcao.equals("7") || opcao.equals("8")) {
 			return opcao;
 		}
 		JOptionPane.showMessageDialog(null, "Por favor, escolha uma opção válida!");

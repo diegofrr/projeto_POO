@@ -95,7 +95,14 @@ public class Principal {
 							JOptionPane.showMessageDialog(null, sistema.database.listarCursos());
 							
 							
-						} else if (op.equals("7")){
+						} else if (op.equals("7")) {
+							String rankingProfessores = sistema.rankingProfessores();
+							JOptionPane.showMessageDialog(null, "RANKING \n\n" + rankingProfessores);
+						
+							
+						}
+						
+						else if (op.equals("8")){
 							break;
 						}
 					}
