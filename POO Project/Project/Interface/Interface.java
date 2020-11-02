@@ -14,7 +14,7 @@ public interface Interface {
 	public boolean login(String matricula, String senha);
 	public void avaliarProfessor(Aluno _aluno, Professor prof);
 	public Aluno alunoLogado(String matricula);
-	public boolean testarNota(double nota);
+	public boolean testarNota(double nota1, double nota2, double nota3, double nota4, double nota5);
 	public boolean verificaAvaliou(String matricula, Professor prof);
 
 }

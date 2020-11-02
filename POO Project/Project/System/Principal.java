@@ -59,7 +59,7 @@ public class Principal {
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
 							if (sistema.profAvaliado(_prof)) {
 								JOptionPane.showMessageDialog(null, _prof.comentarios());
-								break;
+								
 							} else {
 								JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome()
 										+ ", ainda não foi avaliado. Que tal avalia-lo? :)");

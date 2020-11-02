@@ -55,6 +55,14 @@ public class Database {
 			_cursos.clear();
 			
 			
+			//PROFESSOR 4:
+			_cursos.add(cursoAntropologia);
+			_cursos.add(cursoMatematica);
+			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM", _cursos, new ArrayList<Avaliacao>());
+			listaProfessores.add(_professor4);
+			_cursos.clear();
+			
+			
 			///////////TESTE
 			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123", cursoSI);
 			listaAlunos.add(_aluno);
