@@ -1,6 +1,5 @@
 package System;
 
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Class.Aluno;
@@ -8,9 +7,9 @@ import Class.Avaliacao;
 import Class.Curso;
 import Class.Professor;
 import Database.Database;
-import Interface.Interface;
+import Interfaces.InterfaceSistema;
 
-public class Sistema implements Interface {
+public class Sistema implements InterfaceSistema {
 	Database database = new Database();
 
 	

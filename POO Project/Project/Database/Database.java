@@ -5,11 +5,13 @@ import Class.Avaliacao;
 import Class.Curso;
 import Class.Pessoa;
 import Class.Professor;
+import Interfaces.InterfaceDatabase;
+
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class Database {
+public class Database implements InterfaceDatabase {
 	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
 	private ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();	
 	private ArrayList<Curso> listaCursos = new ArrayList<Curso>();
