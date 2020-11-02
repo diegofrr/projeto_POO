@@ -212,7 +212,7 @@ public class Sistema implements Interface {
 		return false;
 	}
 	
-
+	// VERIFICA SE UM PROFESSOR TEM ALGUMA AVALIAÇÃO
 	public boolean profAvaliado(Professor _prof) {
 		if(_prof.getAvaliacao().size() == 0) {
 			return false;
