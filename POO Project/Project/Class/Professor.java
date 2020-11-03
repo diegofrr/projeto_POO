@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class Professor extends Pessoa{
 	private ArrayList<Curso>  listaCursos = new ArrayList<Curso>();
-	private ArrayList<Avaliacao> avaliacao = new ArrayList<Avaliacao>();
+	private ArrayList<Avaliacao> avaliacoesRecebidas = new ArrayList<Avaliacao>();
 	
 	public Professor(String _nome, String _matricula, String _email) {
 		super(_nome, _matricula, _email);
@@ -44,16 +44,16 @@ public class Professor extends Pessoa{
 				+ "Curso(s): \n" + listarCursos() ;
 	}
 
-	public ArrayList<Avaliacao> getAvaliacao() {
-		return this.avaliacao;
+	public ArrayList<Avaliacao> getAvaliacoesRecebidas() {
+		return this.avaliacoesRecebidas;
 	}
 
-	public void setAvaliacao(ArrayList<Avaliacao> avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setAvaliacoesRecebidas(ArrayList<Avaliacao> avaliacao) {
+		this.avaliacoesRecebidas = avaliacao;
 	}
 	
 	public double calculaMetodologiaEnsino() {
-		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacoesRecebidas();
 		int quantAvaliacoes = _avaliacao.size();
 		double avaliacaoGeral = 0;
 		for(Avaliacao av : _avaliacao) {
@@ -63,7 +63,7 @@ public class Professor extends Pessoa{
 	}
 
 	public double calculaQualidadeMateriais() {
-		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacoesRecebidas();
 		int quantAvaliacoes = _avaliacao.size();
 		double avaliacaoGeral = 0;
 		for(Avaliacao av : _avaliacao) {
@@ -73,7 +73,7 @@ public class Professor extends Pessoa{
 	}
 	
 	public double calculaInteracaoTurma() {
-		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacoesRecebidas();
 		int quantAvaliacoes = _avaliacao.size();
 		double avaliacaoGeral = 0;
 		for(Avaliacao av : _avaliacao) {
@@ -84,7 +84,7 @@ public class Professor extends Pessoa{
 
 
 	public double calculaFidelidadeCronograma() {
-		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacoesRecebidas();
 		int quantAvaliacoes = _avaliacao.size();
 		double avaliacaoGeral = 0;
 		for(Avaliacao av : _avaliacao) {
@@ -95,7 +95,7 @@ public class Professor extends Pessoa{
 	}
 	
 	public double calculaRecomendacao() {
-		ArrayList<Avaliacao> _avaliacao = this.getAvaliacao();
+		ArrayList<Avaliacao> _avaliacao = this.getAvaliacoesRecebidas();
 		int quantAvaliacoes = _avaliacao.size();
 		double avaliacaoGeral = 0;
 		for(Avaliacao av : _avaliacao) {
@@ -125,7 +125,7 @@ public class Professor extends Pessoa{
 	
 	public String comentarios() {
 		String lista = "";
-		for(Avaliacao _avaliacao : getAvaliacao()) {
+		for(Avaliacao _avaliacao : getAvaliacoesRecebidas()) {
 			lista += "Autor: " + _avaliacao.getAluno().getNome() + " (" + _avaliacao.getAluno().getMatricula() + ")\n"
 					+ "- " + _avaliacao.getMensagem() + "\n\n";
 		}

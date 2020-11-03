@@ -182,7 +182,7 @@ public class Sistema implements InterfaceSistema {
 				Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma,
 						notaFidelidadeMaterial, notaRecomendacao, mensagem, _aluno, prof);
 				JOptionPane.showMessageDialog(null, "Avaliação feita com sucesso, obrigado!");
-				prof.getAvaliacao().add(_avaliacao);
+				prof.getAvaliacoesRecebidas().add(_avaliacao);
 				break;
 
 				// chamada de erro caso o aluno não informe um número nos inputs das notas mais
@@ -231,7 +231,7 @@ public class Sistema implements InterfaceSistema {
 
 	// VERIFICA SE ALUNO JA AVALIOU UM PROFESSOR
 	public boolean verificaAvaliou(String matricula, Professor prof) {
-		for (Avaliacao _avaliacao : prof.getAvaliacao()) {
+		for (Avaliacao _avaliacao : prof.getAvaliacoesRecebidas()) {
 			if (_avaliacao.getAluno().getMatricula().equals(matricula)) {
 				return true;
 			}
@@ -241,7 +241,7 @@ public class Sistema implements InterfaceSistema {
 
 	// VERIFICA SE UM PROFESSOR TEM ALGUMA AVALIAÇÃO
 	public boolean profAvaliado(Professor _prof) {
-		if (_prof.getAvaliacao().size() == 0) {
+		if (_prof.getAvaliacoesRecebidas().size() == 0) {
 			return false;
 		}
 		return true;
