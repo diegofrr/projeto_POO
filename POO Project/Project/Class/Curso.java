@@ -6,8 +6,8 @@ public class Curso {
 	
 	private String nome;
 	private String codigo;
-	ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
-	ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();
+	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
+	private ArrayList<Aluno> listaAlunos = new ArrayList<Aluno>();
 	
 	public Curso(String _nome, String _codigo) {
 		this.nome = _nome;

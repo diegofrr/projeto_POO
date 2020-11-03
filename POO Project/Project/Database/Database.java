@@ -8,6 +8,7 @@ import Class.Professor;
 import Interfaces.InterfaceDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
@@ -27,54 +28,53 @@ public class Database implements InterfaceDatabase {
 			Curso cursoMatematica 		=	new Curso("MATEMÁTICA" 				, 	"6666666"); listaCursos.add(cursoMatematica);
 			Curso cursoAntropologia 	= 	new Curso("ANTROPOLOGIA" 			, 	"7777777"); listaCursos.add(cursoAntropologia);
 			
-			 ArrayList<Curso> _cursos = new ArrayList<Curso>();	
 			 
 			 /*CRIANDO PROFESSORES:
 			  * Primeiro seleciona o(s) curso(s) do professor;
 			  * Atribui ao objeto _professor nome, matrícula, e-mail e a lista de cursos.
 			  */
 			 
+			 
+			 ArrayList<Curso> cursos;
+			 
 			 //PROFESSOR 1:
-			Professor _professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM");
-			_professor1.getListaCursos().add(cursoSI);
-			_professor1.getListaCursos().add(cursoCC);
-			cursoSI.adicionarProfessor(_professor1);
-			cursoCC.adicionarProfessor(_professor1);
-			listaProfessores.add(_professor1);
+			cursos = new ArrayList<Curso>(Arrays.asList(cursoSI, cursoCC));
+			Professor professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM", cursos);	
+			for (Curso c : cursos) { c.getListaProfessores().add(professor1);}
+			listaProfessores.add(professor1);
+			
 			
 			//PROFESSOR 2:
-			Professor _professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM");
-			_professor2.getListaCursos().add(cursoDesign);
-			cursoDesign.adicionarProfessor(_professor2);
-			listaProfessores.add(_professor2);
+			cursos = new ArrayList<Curso>(Arrays.asList(cursoDesign));
+			Professor professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM", cursos);
+			for (Curso c : cursos) { c.getListaProfessores().add(professor2); }
+			listaProfessores.add(professor2);
+			
 			
 			
 			//PROFESSOR 3:
-			Professor _professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM");
-			_professor3.getListaCursos().add(cursoDesign);
-			cursoDesign.adicionarProfessor(_professor3);
-			listaProfessores.add(_professor3);
+			cursos = new ArrayList<Curso>(Arrays.asList(cursoAntropologia));
+			Professor professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", cursos);
+			for (Curso c : cursos) { c.getListaProfessores().add(professor3); }
+			listaProfessores.add(professor3);
 			
 			//PROFESSOR 4:
-			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM");
-			_professor4.getListaCursos().add(cursoAntropologia);
-			_professor4.getListaCursos().add(cursoMatematica);
-			cursoAntropologia.adicionarProfessor(_professor4);
-			cursoMatematica.adicionarProfessor(_professor4);
+			cursos = new ArrayList<Curso>(Arrays.asList(cursoAntropologia, cursoMatematica));
+			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM", cursos);
+			for (Curso c : cursos) { c.getListaProfessores().add(_professor4); }
 			listaProfessores.add(_professor4);
 			
 			//PROFESSOR 5:
-			Professor _professor5 = new Professor("PROFESSOR5", "5555555", "PROFESSOR5@GMAIL.COM");
-			_professor5.getListaCursos().add(cursoMatematica);
-			cursoMatematica.adicionarProfessor(_professor5);
+			cursos = new ArrayList<Curso>(Arrays.asList(cursoLetras, cursoEcologia));
+			Professor _professor5 = new Professor("PROFESSOR5", "5555555", "PROFESSOR5@GMAIL.COM", cursos);
+			for (Curso c : cursos) { c.getListaProfessores().add(_professor5); }
 			listaProfessores.add(_professor5);
 			
 			
 			
 			
 			///////////TESTE
-			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123");
-			_aluno.setCurso(cursoSI);
+			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123", cursoSI);
 			cursoSI.adicionarAluno(_aluno);
 			listaAlunos.add(_aluno);
 			

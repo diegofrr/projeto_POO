@@ -77,8 +77,7 @@ public class Sistema implements InterfaceSistema {
 		}
 
 		Curso curso = this.escolherCurso();
-		Aluno aluno = new Aluno(nome, matricula, email, senha);
-		aluno.setCurso(curso);
+		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
 		database.getListaAlunos().add(aluno);
 		curso.adicionarAluno(aluno);
 		return true;

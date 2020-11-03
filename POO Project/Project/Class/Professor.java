@@ -8,14 +8,15 @@ public class Professor extends Pessoa{
 	private ArrayList<Curso>  listaCursos = new ArrayList<Curso>();
 	private ArrayList<Avaliacao> avaliacoesRecebidas = new ArrayList<Avaliacao>();
 	
-	public Professor(String _nome, String _matricula, String _email) {
+	public Professor(String _nome, String _matricula, String _email, ArrayList<Curso> _cursos) {
 		super(_nome, _matricula, _email);
+		this.listaCursos = _cursos;
 		
 	}
 	
 	public Professor() {
 		super();
-	
+		this.listaCursos = new ArrayList<Curso>();
 	}
 
 	public ArrayList<Curso> getListaCursos() {
