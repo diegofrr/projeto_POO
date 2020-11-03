@@ -29,14 +29,13 @@ public class Menus implements InterfaceMenus {
 
 													"1. AVALIAR PROFESSOR \n"+
 													"2. VER ESTATÍSTICAS DE UM PROFESSOR \n"+
-													"3. VER COMENTÁRIOS DE UM PROFESSOR \n"+
-													"4. ACESSAR CURSO \n" +
-													"5. LISTAR PROFESSORES \n" +
-													"6. LISTAR CURSOS \n"+
-													"7. RANKING DOS PROFESSORES \n" +
-													"8. ENCERRAR SESSÃO");
+													"3. ACESSAR CURSO \n" +
+													"4. LISTAR PROFESSORES \n" +
+													"5. LISTAR CURSOS \n"+
+													"6. RANKING DOS PROFESSORES \n" +
+													"7. DESLOGAR");
 
-		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3") || opcao.equals("4") || opcao.equals("5") || opcao.equals("6") || opcao.equals("7") || opcao.equals("8")) {
+		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3") || opcao.equals("4") || opcao.equals("5") || opcao.equals("6") || opcao.equals("7")) {
 			return opcao;
 		}
 		JOptionPane.showMessageDialog(null, "Por favor, escolha uma opção válida!");
@@ -58,5 +57,19 @@ public class Menus implements InterfaceMenus {
 			JOptionPane.showMessageDialog(null, "Por favor, escolha uma opção válida!");
 			
 			}
+	}
+	
+	public String menuEstatisticasProfessor() {
+	while(true) {
+		String opcao = JOptionPane.showInputDialog(	"1. NOTAS \n"+
+													"2. COMENTÁRIOS DOS ALUNOS \n" +
+													"3. VOLTAR");
+
+		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3")) {
+			return opcao;
+		}
+		JOptionPane.showMessageDialog(null, "Por favor, escolha uma opção válida!");
+		
+		}
 	}
 }

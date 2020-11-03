@@ -39,43 +39,29 @@ public class Principal {
 							}
 
 						} else if (op.equals("2")) {
-							String nome = JOptionPane.showInputDialog("Nome do professor");
-							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-
-							if (_prof == null) {
-								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente");
-
-							} else {
-								if (sistema.profAvaliado(_prof)) {
-									JOptionPane.showMessageDialog(null, _prof.notas());
-
-								} else {
-									JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome()
-											+ ", ainda não foi avaliado. Que tal avalia-lo? :)");
-								}
-
-							}
-
-						} else if (op.equals("3")) {
+							
 							String nome = JOptionPane.showInputDialog("Nome do professor");
 							Professor _prof = sistema.procurarProfessorPeloNome(nome);
 							
 							if (_prof == null) {
 								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente");
 
-							} else {
-								if (sistema.profAvaliado(_prof)) {
-									JOptionPane.showMessageDialog(null, _prof.comentarios());
-									
-								} else {
-									JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome()
-											+ ", ainda não foi avaliado. Que tal avalia-lo? :)");
-								}
-								
-							}
-									
 
-						} else if (op.equals("4")) {
+							} else if (sistema.profAvaliado(_prof)) {
+								String opc = menu.menuEstatisticasProfessor();
+								
+								if (opc.equals("1")) { JOptionPane.showMessageDialog(null, _prof.notas()); }
+								else if (opc.equals("2")) { JOptionPane.showMessageDialog(null, _prof.comentarios()); }
+								else { continue; }
+								
+							} else {
+								JOptionPane.showMessageDialog(null, "O professor, " + _prof.getNome()
+								+ ", ainda não foi avaliado. Que tal avalia-lo? :)");
+		
+							}
+								 	
+
+						} else if (op.equals("3")) {
 							Curso _cursoAcessado = sistema.escolherCurso();
 							if (_cursoAcessado == null) continue;
 							String opcaoCurso = menu.menuAcessarCurso(_cursoAcessado);
@@ -87,22 +73,22 @@ public class Principal {
 								
 							}
 							
-						} else if (op.equals("5")) {
+						} else if (op.equals("4")) {
 							JOptionPane.showMessageDialog(null, sistema.database.listarProfessores());
 							
 							
-						} else if (op.equals("6")) {
+						} else if (op.equals("5")) {
 							JOptionPane.showMessageDialog(null, sistema.database.listarCursos());
 							
 							
-						} else if (op.equals("7")) {
+						} else if (op.equals("6")) {
 							String rankingProfessores = sistema.rankingProfessores();
-							JOptionPane.showMessageDialog(null, "RANKING \n\n" + rankingProfessores);
+							JOptionPane.showMessageDialog(null, rankingProfessores);
 						
 							
 						}
 						
-						else if (op.equals("8")){
+						else if (op.equals("7")){
 							break;
 						}
 					}
