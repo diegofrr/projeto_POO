@@ -5,27 +5,39 @@ import javax.swing.JOptionPane;
 import Class.Aluno;
 import Class.Curso;
 import Interfaces.InterfaceMenus;
+import Exceptions.OpcaoInvalida;
 
 public class Menus implements InterfaceMenus {
 	
+	public static final String ERRO_OPCAO_INVALIDA = "Opção inválida!";
 	
-	public String menuPrincipal() {
+	
+	public int menuPrincipal() throws OpcaoInvalida  {
 		while(true) {
-			String opcao = JOptionPane.showInputDialog(	"1. LOGAR NO SISTEMA \n" +
-														"2. SE CADASTRAR \n"+
-														"3. FECHAR PROGRAMA");
+			try {
+			int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"1. LOGAR NO SISTEMA \n" +
+																		"2. SE CADASTRAR \n"+
+																		"3. FECHAR PROGRAMA"));
 
-			if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3")) {
-				return opcao;
+				
+				if( opcao < 1 || opcao > 3) {
+					throw new OpcaoInvalida();
+				} return opcao;
+				
+			}catch (OpcaoInvalida ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			}catch(NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, ERRO_OPCAO_INVALIDA);
 			}
-			JOptionPane.showMessageDialog(null, "Por favor, escolha uma opção válida!");
 			
 			}
+		
 	}
 	
-	public String menuSecundario(Aluno _alunoLogado) {
+	public int menuSecundario(Aluno _alunoLogado) throws OpcaoInvalida {
 		while(true) {
-		String opcao = JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome() + " ("+ _alunoLogado.getMatricula() +")\n\n" +
+			try {
+				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome() + " ("+ _alunoLogado.getMatricula() +")\n\n" +
 
 													"1. AVALIAR PROFESSOR \n"+
 													"2. VER ESTATÍSTICAS DE UM PROFESSOR \n"+
@@ -33,12 +45,20 @@ public class Menus implements InterfaceMenus {
 													"4. LISTAR PROFESSORES \n" +
 													"5. LISTAR CURSOS \n"+
 													"6. RANKING DOS PROFESSORES \n" +
-													"7. DESLOGAR");
-
-		if(opcao.equals("1") || opcao.equals("2") || opcao.equals("3") || opcao.equals("4") || opcao.equals("5") || opcao.equals("6") || opcao.equals("7")) {
-			return opcao;
-		}
-		JOptionPane.showMessageDialog(null, "Por favor, escolha uma opção válida!");
+													"7. DESLOGAR"));
+				if (opcao < 1 || opcao > 7) {
+					throw new OpcaoInvalida();
+				} return opcao;
+				
+				
+			} catch ( OpcaoInvalida ex){
+				JOptionPane.showMessageDialog(null, ex.getMessage());
+			
+			
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, ERRO_OPCAO_INVALIDA);
+			}
+		
 		
 		}
 

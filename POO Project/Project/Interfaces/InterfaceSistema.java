@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Class.Aluno;
 import Class.Curso;
 import Class.Professor;
+import Exceptions.NotaInvalida;
 
 public interface InterfaceSistema {
 	
@@ -14,7 +15,7 @@ public interface InterfaceSistema {
 	public String rankingProfessores();
 	public boolean login(String matricula, String senha);
 	public boolean cadastrarAluno();
-	public boolean testarNota(double nota1, double nota2, double nota3, double nota4, double nota5);
+	public boolean notaValida(double nota);
 	public boolean verificaAvaliou(String matricula, Professor prof);
 	public boolean profAvaliado(Professor _prof);
 	public void avaliarProfessor(Aluno _aluno, Professor prof);

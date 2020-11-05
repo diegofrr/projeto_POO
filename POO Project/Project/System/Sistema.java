@@ -1,12 +1,17 @@
 package System;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+
 import javax.swing.JOptionPane;
 import Class.Aluno;
 import Class.Avaliacao;
 import Class.Curso;
 import Class.Professor;
 import Database.Database;
+import Exceptions.CampoVazio;
+import Exceptions.NotaInvalida;
+import Exceptions.OpcaoInvalida;
 import Interfaces.InterfaceSistema;
 
 public class Sistema implements InterfaceSistema {
@@ -100,33 +105,40 @@ public class Sistema implements InterfaceSistema {
 				profEncontrados.add(_prof);
 			}
 		}
+		
+		if (profEncontrados.size() == 0) { return null; }
+		else if (profEncontrados.size() == 1) {
+			JOptionPane.showMessageDialog(null, "1 professor encontrado \n\n" + profEncontrados.get(0).toString());
+			return profEncontrados.get(0);
+		}
+		
+		
 		String listaProfEncontrados = "";
 		int cont = 1;
 		for (Professor _professor : profEncontrados) {
 			listaProfEncontrados += cont++ + ". " + _professor.toString() + "\n";
 		}
-		if (profEncontrados.size() == 0) {
-			return null;
-		}
 
-		else if (profEncontrados.size() == 1) {
-			JOptionPane.showMessageDialog(null, "1 professor encontrado \n\n" + listaProfEncontrados);
-			return profEncontrados.get(0);
-		}
 
 		while (true) {
 			try {
 
 				int opcao = Integer.parseInt(JOptionPane.showInputDialog(profEncontrados.size()
 						+ " professor(es) encontrad(os), escolha um:" + "\n\n" + listaProfEncontrados));
+				
+				
+				if (opcao < 1 || opcao >= cont) { throw new OpcaoInvalida(); }
 				return profEncontrados.get(opcao - 1);
 
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Por favor, digite uma opção válida!");
+			} catch (OpcaoInvalida ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
 
+			} catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(null, "Opção inválida!");
+				} 
 			}
-		}
 	}
+	
 
 	// TESTA SE EXISTE LOGIN NO BANCO DE DAOS
 	public boolean login(String matricula, String senha) {
@@ -159,38 +171,63 @@ public class Sistema implements InterfaceSistema {
 						+ "b. Informe as notas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo \n"
 						+ "c. Caso queira sair desta janela, informe uma letra qualquer nas notas exigidas a seguir");
 
-				double notaMetodologiaEnsino = Double
-						.parseDouble(JOptionPane.showInputDialog("Metodologia de ensino (0 - 10)"));
-				double notaQualMateriais = Double
-						.parseDouble(JOptionPane.showInputDialog("Qualidade dos materiais (0 - 10)"));
-				double notaInteracaoTurma = Double
-						.parseDouble(JOptionPane.showInputDialog("Interação com a turma (0 - 10)"));
-				double notaFidelidadeMaterial = Double
-						.parseDouble(JOptionPane.showInputDialog("Fiderelidade do prof. com o material (0 - 10)"));
-				double notaRecomendacao = Double
-						.parseDouble(JOptionPane.showInputDialog("Quanto você recomenda o professor (0 - 10)"));
-				boolean notaAceita = this.testarNota(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma,
-						notaFidelidadeMaterial, notaRecomendacao);
-
-				// for utilizado para testar se todas as notas recebidas estão entre 0 e 10
-				if (!notaAceita) {
-					throw new Exception();
-				}
-
-				String mensagem = JOptionPane.showInputDialog("Deixe um comentário");
-				Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma,
-						notaFidelidadeMaterial, notaRecomendacao, mensagem, _aluno, prof);
+				double notaMetodologiaEnsino = Double.parseDouble(JOptionPane.showInputDialog("Metodologia de ensino"));
+				if (!notaValida(notaMetodologiaEnsino)) { throw new NotaInvalida();}
+				
+				double notaQualMateriais = Double.parseDouble(JOptionPane.showInputDialog("Qualidade dos materiais"));
+				if (!notaValida(notaQualMateriais)) { throw new NotaInvalida();}
+				
+				double notaInteracaoTurma = Double.parseDouble(JOptionPane.showInputDialog("Interação com a turma"));
+				if (!notaValida(notaInteracaoTurma)) { throw new NotaInvalida();}
+				
+				double notaFidelidadeMaterial = Double.parseDouble(JOptionPane.showInputDialog("Fiderelidade do prof. com o material"));
+				if (!notaValida(notaFidelidadeMaterial)) { throw new NotaInvalida();}
+				
+				double notaRecomendacao = Double.parseDouble(JOptionPane.showInputDialog("Quanto você recomenda o professor"));
+				if (!notaValida(notaRecomendacao)) { throw new NotaInvalida();}
+				
+				String mensagem = null;
+				String nomeAluno = _aluno.getNome();
+				String matAluno = _aluno.getMatricula();
+				
+				int dxMensagem = JOptionPane.showConfirmDialog(null, "Deseja deixar um comentário sobre o professor?", null, JOptionPane.YES_NO_OPTION);
+				int anonimo = JOptionPane.showConfirmDialog(null, "Comentar anonimamente?", null, JOptionPane.YES_NO_OPTION);
+				
+				if (anonimo == 0) {
+					_aluno.setNome("Anônimo");
+					_aluno.setMatricula("");
+				} 
+				
+				if (dxMensagem == 0) {
+					mensagem = JOptionPane.showInputDialog("Seu comentário");
+					
+					try {
+						if (mensagem == null) {
+							throw new CampoVazio();
+						}
+					}catch (CampoVazio ex) {
+						JOptionPane.showMessageDialog(null, ex.getMessage());
+					}
+					
+					
+				} 
+				
+				Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao, mensagem, _aluno, prof);
 				JOptionPane.showMessageDialog(null, "Avaliação feita com sucesso, obrigado!");
 				prof.getAvaliacoesRecebidas().add(_avaliacao);
+				_aluno.setNome(nomeAluno);
+				_aluno.setMatricula(matAluno);
 				break;
 
 				// chamada de erro caso o aluno não informe um número nos inputs das notas mais
 				// acima
-			} catch (Exception ex) {
+			} catch (NumberFormatException  ex) {
 				JOptionPane.showMessageDialog(null,
-						"Algo saiu errado! Verifique sua notas aplicadas e tente novamente \n");
+						"Por favor, informe apenas números");
 				break;
 
+			} catch (NotaInvalida ex) {
+				JOptionPane.showMessageDialog(null, ex.getMessage());
 			}
 		}
 
@@ -211,18 +248,9 @@ public class Sistema implements InterfaceSistema {
 	}
 
 	// VERIFICA SE AS NOTAS ATRIBUÍDAS ESTÃO ENTRE 0 E 10
-	public boolean testarNota(double nota1, double nota2, double nota3, double nota4, double nota5) {
-		ArrayList<Double> notas = new ArrayList<Double>();
-		notas.add(nota1);
-		notas.add(nota2);
-		notas.add(nota3);
-		notas.add(nota4);
-		notas.add(nota5);
-
-		for (double _nota : notas) {
-			if (_nota < 0 || _nota > 10) {
-				return false;
-			}
+	public boolean notaValida(double nota) {
+		if (nota < 0 || nota > 10) {
+			return false;
 		}
 		return true;
 

@@ -127,9 +127,19 @@ public class Professor extends Pessoa{
 	public String comentarios() {
 		String lista = "";
 		for(Avaliacao _avaliacao : getAvaliacoesRecebidas()) {
-			lista += "Autor: " + _avaliacao.getAluno().getNome() + " (" + _avaliacao.getAluno().getMatricula() + ")\n"
-					+ "- " + _avaliacao.getMensagem() + "\n\n";
+			if(_avaliacao.getMensagem() == null) {
+				
+			}else {
+				lista += "Autor: " + _avaliacao.getAluno().getNome() + " (" + _avaliacao.getAluno().getMatricula() + ")\n"
+						+ "- " + _avaliacao.getMensagem() + "\n\n";
+			}
 		}
+		
+		if (lista == "") {
+			String nomeProf = getAvaliacoesRecebidas().get(0).getProfessor().getNome();
+			return nomeProf + " não recebeu nenhum comentário";
+		}
+		
 		return lista;
 	}
 
