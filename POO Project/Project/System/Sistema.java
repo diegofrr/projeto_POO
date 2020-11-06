@@ -203,6 +203,8 @@ public class Sistema implements InterfaceSistema {
 
 			} catch (NotaInvalida ex) {
 				JOptionPane.showMessageDialog(null, ex.getMessage());
+			} catch (Exception ex) {
+				break;
 			}
 		}
 

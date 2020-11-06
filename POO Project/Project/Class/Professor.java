@@ -30,7 +30,7 @@ public class Professor extends Pessoa{
 	public String listarCursos() {
 		String lista = "";
 		for(Curso _curso : listaCursos) {
-			lista += _curso.toString();
+			lista += _curso.toStringCodigo();
 		}
 		
 	
@@ -42,7 +42,7 @@ public class Professor extends Pessoa{
 		return "Nome: " + getNome() + "\n"
 				+ "Matrícula: " + getMatricula() + "\n"
 				+ "E-mail: " + getEmail() + "\n"
-				+ "Curso(s): \n" + listarCursos() ;
+				+ "Curso(s): \n" + listarCursos() + "\n";
 	}
 	public String toString() {
 		return getNome();

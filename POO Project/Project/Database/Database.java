@@ -115,7 +115,7 @@ public class Database implements InterfaceDatabase {
 		public String listarCursos() {
 			String lista = "";
 			for(Curso _curso : listaCursos) {
-				lista += _curso.toString();
+				lista += _curso.toStringCodigo();
 			}return lista;
 		}
 		
@@ -133,7 +133,7 @@ public class Database implements InterfaceDatabase {
 			if (_curso.getListaProfessores().size() == 0) return "Nenhum professor cadastrado neste curso";
 			String lista = "";
 			for(Professor _prof : _curso.getListaProfessores()) {
-				lista += _prof.toString() + "\n";
+				lista += _prof.toStringAll() ;
 			}
 			return lista;
 		}
@@ -141,7 +141,7 @@ public class Database implements InterfaceDatabase {
 		public String listarProfessores() {
 			String lista = "";
 			for(Professor _prof : getListaProfessores()) {
-				lista += _prof.toString() + "\n";
+				lista += _prof.toStringAll() ;
 			}
 			return lista;
 		}
