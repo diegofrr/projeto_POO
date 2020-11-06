@@ -38,11 +38,14 @@ public class Professor extends Pessoa{
 		
 	}
 	
-	public String toString() {
+	public String toStringAll() {
 		return "Nome: " + getNome() + "\n"
 				+ "Matrícula: " + getMatricula() + "\n"
 				+ "E-mail: " + getEmail() + "\n"
 				+ "Curso(s): \n" + listarCursos() ;
+	}
+	public String toString() {
+		return getNome();
 	}
 
 	public ArrayList<Avaliacao> getAvaliacoesRecebidas() {
@@ -120,8 +123,8 @@ public class Professor extends Pessoa{
 				"Qualidade dos materis: " 		+ this.calculaQualidadeMateriais() 		+	"\n" +
 				"Interação com a turma: " 		+ this.calculaInteracaoTurma() 			+	"\n" +
 				"Fidelidade com o cronograma: " + this.calculaFidelidadeCronograma() 	+	"\n" +
-				"Recomendação do prof.: "			+ this.calculaRecomendacao() 			+	"\n" +
-				"Média geral: "				+ this.calculaMediaGeral();				
+				"Recomendação do prof.: "		+ this.calculaRecomendacao() 			+	"\n" +
+				"Média geral: "					+ this.calculaMediaGeral();				
 	}
 	
 	public String comentarios() {
@@ -130,7 +133,11 @@ public class Professor extends Pessoa{
 			if(_avaliacao.getMensagem() == null) {
 				
 			}else {
-				lista += "Autor: " + _avaliacao.getAluno().getNome() + " (" + _avaliacao.getAluno().getMatricula() + ")\n"
+				String nomeAluno = _avaliacao.getAluno().getNome();
+				String matAluno = " (" + _avaliacao.getAluno().getMatricula() + ")";
+				if (_avaliacao.isAnonimo()) { nomeAluno = "Anônimo"; matAluno = "";}
+				
+				lista += "Autor: " + nomeAluno + matAluno + "\n"
 						+ "- " + _avaliacao.getMensagem() + "\n\n";
 			}
 		}

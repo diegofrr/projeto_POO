@@ -22,30 +22,16 @@ public class Sistema implements InterfaceSistema {
 	public static final String EMAIL_INVALIDO = "E-mail inválido!";
 	public static final String SENHA_INVALIDA = "Senha inválida! Por favor, não utilize espaços.";
 
+	
 	// ESCOLHE UM CURSO DISPONÍVEL
 	public Curso escolherCurso() {
-		String listaCursosStr = "";
-		int cont = 1;
 		ArrayList<Curso> listaCursos = database.getListaCursos();
-
-		for (Curso _curso : listaCursos) {
-			listaCursosStr += cont++ + ". " + _curso.getNome() + "\n";
-		}
-		listaCursosStr += cont + ". SAIR";
-		while (true) {
-			try {
-
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog("Selecione o curso \n\n" + listaCursosStr));
-				if (opcao == (listaCursos.size() + 1))
-					return null;
-				return listaCursos.get(opcao - 1);
-
-			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Por favor, digite uma opção válida!");
-
-			}
-		}
+		Object[] cursos = new Object[listaCursos.size()];
+		for (int k = 0; k < listaCursos.size(); k++) { cursos[k] = listaCursos.get(k); }
+		Object valorSelecionado = JOptionPane.showInputDialog(null, "Escolha um curso", "Opção", JOptionPane.INFORMATION_MESSAGE, null, cursos, cursos[0]);
+		return (Curso) valorSelecionado;	
 	}
+
 
 	// CADASTRA ALUNO
 	public boolean cadastrarAluno() {
@@ -121,21 +107,14 @@ public class Sistema implements InterfaceSistema {
 
 
 		while (true) {
-			try {
-
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog(profEncontrados.size()
-						+ " professor(es) encontrad(os), escolha um:" + "\n\n" + listaProfEncontrados));
-				
-				
-				if (opcao < 1 || opcao >= cont) { throw new OpcaoInvalida(); }
-				return profEncontrados.get(opcao - 1);
-
-			} catch (OpcaoInvalida ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage());
-
-			} catch (NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null, "Opção inválida!");
-				} 
+			
+			Object[] professores = new Object[profEncontrados.size()];
+			for (int k = 0; k < profEncontrados.size(); k++) { professores[k] = profEncontrados.get(k); }
+			Object selectedValue = JOptionPane.showInputDialog(null, profEncontrados.size() 
+					+ " professores encontrados. \nEscolha um:", "Opção", JOptionPane.INFORMATION_MESSAGE, null, professores, professores[0]);
+			return (Professor) selectedValue;
+			
+		
 			}
 	}
 	
@@ -187,15 +166,13 @@ public class Sistema implements InterfaceSistema {
 				if (!notaValida(notaRecomendacao)) { throw new NotaInvalida();}
 				
 				String mensagem = null;
-				String nomeAluno = _aluno.getNome();
-				String matAluno = _aluno.getMatricula();
+				boolean alunoAnonimo = false;
 				
 				int dxMensagem = JOptionPane.showConfirmDialog(null, "Deseja deixar um comentário sobre o professor?", null, JOptionPane.YES_NO_OPTION);
 				int anonimo = JOptionPane.showConfirmDialog(null, "Comentar anonimamente?", null, JOptionPane.YES_NO_OPTION);
 				
 				if (anonimo == 0) {
-					_aluno.setNome("Anônimo");
-					_aluno.setMatricula("");
+					alunoAnonimo = true;
 				} 
 				
 				if (dxMensagem == 0) {
@@ -212,11 +189,9 @@ public class Sistema implements InterfaceSistema {
 					
 				} 
 				
-				Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao, mensagem, _aluno, prof);
+				Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao, mensagem, _aluno, prof, alunoAnonimo);
 				JOptionPane.showMessageDialog(null, "Avaliação feita com sucesso, obrigado!");
 				prof.getAvaliacoesRecebidas().add(_avaliacao);
-				_aluno.setNome(nomeAluno);
-				_aluno.setMatricula(matAluno);
 				break;
 
 				// chamada de erro caso o aluno não informe um número nos inputs das notas mais

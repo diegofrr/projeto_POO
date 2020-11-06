@@ -52,7 +52,13 @@ public class Curso {
 	}
 	
 	public String toString() {
+		return getNome();
+
+	}
+	
+	public String toStringCodigo() {
 		return getNome() + " (" + getCodigo() + ")" + "\n";
 
 	}
+	
 }

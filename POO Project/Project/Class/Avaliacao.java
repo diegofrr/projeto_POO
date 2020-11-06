@@ -9,8 +9,9 @@ public class Avaliacao {
 	private String mensagem;
 	private Aluno aluno;
 	private Professor professor;
+	private boolean anonimo;
 	
-	public Avaliacao(double _met, double _qualidMat, double _intTurma, double _fidCronograma, double _recomendacao, String _mensagem, Aluno _aluno, Professor _prof) {
+	public Avaliacao(double _met, double _qualidMat, double _intTurma, double _fidCronograma, double _recomendacao, String _mensagem, Aluno _aluno, Professor _prof, boolean _anonimo) {
 		this.metodologiaEnsino = _met;
 		this.qualidadeMateriais = _qualidMat;
 		this.interacaoTurma = _intTurma;
@@ -19,6 +20,7 @@ public class Avaliacao {
 		this.mensagem = _mensagem;
 		this.aluno = _aluno;
 		this.professor = _prof;
+		this.anonimo = _anonimo;
 	}
 	
 	public Avaliacao() {
@@ -30,6 +32,7 @@ public class Avaliacao {
 		this.mensagem = "";
 		this.aluno = new Aluno();
 		this.professor = new Professor();
+		this.anonimo = false;
 	}
 	
 	
@@ -122,6 +125,14 @@ public class Avaliacao {
 
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
+	}
+
+	public boolean isAnonimo() {
+		return anonimo;
+	}
+
+	public void setAnonimo(boolean anonimo) {
+		this.anonimo = anonimo;
 	}
 	
 }
