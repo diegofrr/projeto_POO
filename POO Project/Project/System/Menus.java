@@ -118,9 +118,11 @@ public class Menus implements InterfaceMenus {
 		while(true) {
 			try {
 				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"1. DADOS PESSOAIS \n"+
-																			"2. AVALIAÇÕES FEITAS \n"+
-																			"3. VOLTAR"));
-				if (opcao < 1 || opcao > 3) {
+																			"2. MINHAS AVALIAÇÕES \n"+
+																			"3. ATUALIZAR SENHA \n" +
+																			"4. ATUALIZAR E-MAIL \n" +
+																			"5. VOLTAR"));
+				if (opcao < 1 || opcao > 5) {
 					throw new OpcaoInvalida();
 				} return opcao;
 				
@@ -136,4 +138,7 @@ public class Menus implements InterfaceMenus {
 		
 		}
 	}
+	
+	
+	
 }

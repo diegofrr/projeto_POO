@@ -118,13 +118,20 @@ public class Principal {
 						
 						else if (op == 7) {
 							while(true) {
-								
 							
 							int opcaoDados = menu.menuMeusDados();
 							if(opcaoDados == 1) { JOptionPane.showMessageDialog(null, sistema.dadosPessoais(_alunoLogado)); }
 							else if(opcaoDados == 2) {
 							
-							} else if(opcaoDados == 3){ break; }
+							} else if(opcaoDados == 3) {
+								sistema.atualizarSenha(_alunoLogado);
+								
+							} else if(opcaoDados == 4) {
+								sistema.atualizarEmail(_alunoLogado);
+							}
+							
+							
+							else if(opcaoDados == 5){ break; }
 							
 							}
 							

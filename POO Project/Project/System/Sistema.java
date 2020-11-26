@@ -10,8 +10,12 @@ import Class.Curso;
 import Class.Professor;
 import Database.Database;
 import Exceptions.CampoVazio;
+import Exceptions.EmailIgual;
+import Exceptions.EmailInvalido;
 import Exceptions.NotaInvalida;
 import Exceptions.OpcaoInvalida;
+import Exceptions.QuantCaracteres;
+import Exceptions.SenhaIgual;
 import Interfaces.InterfaceSistema;
 
 public class Sistema implements InterfaceSistema {
@@ -287,6 +291,40 @@ public class Sistema implements InterfaceSistema {
 				"Matrícula: " + alunoLogado.getMatricula() + "\n" +
 				"E-mail: " + alunoLogado.getEmail() + "\n" +
 				"Curso: " + alunoLogado.getCurso().getNome();
+	}
+	
+	public void atualizarSenha(Aluno alunoLogado) {
+		try {
+			String novaSenha = JOptionPane.showInputDialog("Nova senha").trim().replaceAll("( +)", "");
+			if(novaSenha.length() < 5) 							throw new QuantCaracteres(5); 
+			else if(novaSenha.equals(alunoLogado.getSenha())) 	throw new SenhaIgual();
+			else alunoLogado.setSenha(novaSenha); JOptionPane.showMessageDialog(null, "Senha alterada com sucesso\n"
+																					+ "Sua nova senha é: " + novaSenha);
+			
+		}catch(QuantCaracteres ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}catch(SenhaIgual ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
+	}
+	
+	public void atualizarEmail(Aluno alunoLogado) {
+		try {
+			String novoEmail = JOptionPane.showInputDialog("Novo e-mail").trim().replaceAll("( +)", "");
+			if(novoEmail.equals(alunoLogado.getEmail())) throw new EmailIgual();
+			else if(!novoEmail.contains("@gmail") 	&&
+					!novoEmail.contains("@outlook") &&
+					!novoEmail.contains("@bol") 	&&
+					!novoEmail.contains("@hotmail")) throw new EmailInvalido(novoEmail);
+			else alunoLogado.setEmail(novoEmail); JOptionPane.showMessageDialog(null, "E-mail alterado com sucesso\n"
+					+ "Seu novo e-mail é: " + novoEmail);
+			
+			
+		}catch(EmailIgual ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}catch(EmailInvalido ex){
+			JOptionPane.showMessageDialog(null, ex.getMessage());
+		}
 	}
 
 }
