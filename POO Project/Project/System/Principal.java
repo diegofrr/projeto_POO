@@ -1,13 +1,11 @@
 package System;
 
-import java.awt.Menu;
 
 import javax.swing.JOptionPane;
 
 import Class.Aluno;
 import Class.Curso;
 import Class.Professor;
-import Database.Database;
 import Exceptions.CampoVazio;
 import Exceptions.OpcaoInvalida;
 
@@ -15,7 +13,7 @@ public class Principal {
 
 	public static void main(String[] args) throws OpcaoInvalida {
 		Sistema sistema = new Sistema();
-		Menus menu = new Menus();	
+		Menus menu = new Menus();
 		
 		while (true) {
 			int opcao = menu.menuPrincipal();
@@ -23,11 +21,13 @@ public class Principal {
 			if (opcao == 1) {
 				String matricula = JOptionPane.showInputDialog("Matrícula");
 				String senha = JOptionPane.showInputDialog("Senha");
-				Aluno _alunoLogado = sistema.alunoLogado(matricula);
-				boolean logou = sistema.login(matricula, senha);
-				if (logou) {
-					JOptionPane.showMessageDialog(null, "Bem vindo, " + _alunoLogado.getNome() + "!");
+				boolean logou = sistema.login(matricula, senha);		
+			
+				if (logou) { 						
+					Aluno _alunoLogado = sistema.alunoLogado(matricula);
+					JOptionPane.showMessageDialog(null, "Bem vindo, " + _alunoLogado.getNome().split(" ")[0] + "!");
 
+					
 					// DEPOIS DO ALUNO LOGAR NO SISTEMA
 					while (true) {
 						int op = menu.menuSecundario(_alunoLogado);
@@ -120,8 +120,10 @@ public class Principal {
 							while(true) {
 							
 							int opcaoDados = menu.menuMeusDados();
-							if(opcaoDados == 1) { JOptionPane.showMessageDialog(null, sistema.dadosPessoais(_alunoLogado)); }
-							else if(opcaoDados == 2) {
+							if(opcaoDados == 1) { 
+								JOptionPane.showMessageDialog(null, sistema.dadosPessoais(_alunoLogado));
+							} else if(opcaoDados == 2) {
+								sistema.avaliacoesFeitas(_alunoLogado);
 							
 							} else if(opcaoDados == 3) {
 								sistema.atualizarSenha(_alunoLogado);
@@ -132,7 +134,8 @@ public class Principal {
 							
 							
 							else if(opcaoDados == 5){ break; }
-							
+								
+								
 							}
 							
 						}

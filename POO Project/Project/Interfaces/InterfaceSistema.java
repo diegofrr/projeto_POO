@@ -1,11 +1,9 @@
 package Interfaces;
 
-import java.util.ArrayList;
 
 import Class.Aluno;
 import Class.Curso;
 import Class.Professor;
-import Exceptions.NotaInvalida;
 
 public interface InterfaceSistema {
 	

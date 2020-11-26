@@ -2,7 +2,6 @@ package Class;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 public class Professor extends Pessoa{
 	private ArrayList<Curso>  listaCursos = new ArrayList<Curso>();

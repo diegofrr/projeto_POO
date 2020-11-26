@@ -113,8 +113,6 @@ public class Avaliacao {
 		return professor;
 	}
 
-
-
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
@@ -133,6 +131,15 @@ public class Avaliacao {
 
 	public void setAnonimo(boolean anonimo) {
 		this.anonimo = anonimo;
+	}
+	
+	public String toString() {
+		return 	"Metedologia de ensino: " 		+ this.metodologiaEnsino + "\n" +
+				"Qualidade dos materiais " 		+ this.qualidadeMateriais + "\n" +
+				"Interação com a turma " 		+ this.interacaoTurma + "\n" +
+				"Fidelidade com o cronograma " 	+ this.fidelidadeCronograma + "\n" +
+				"Recomendação " 				+ this.recomendacao + "\n\n" +
+				"Comentário: " 					+ this.mensagem;
 	}
 	
 }

@@ -1,16 +1,12 @@
 package Database;
 
 import Class.Aluno;
-import Class.Avaliacao;
 import Class.Curso;
-import Class.Pessoa;
 import Class.Professor;
 import Interfaces.InterfaceDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.swing.JOptionPane;
 
 public class Database implements InterfaceDatabase {
 	private ArrayList<Professor> listaProfessores = new ArrayList<Professor>();
@@ -70,14 +66,14 @@ public class Database implements InterfaceDatabase {
 			Professor _professor5 = new Professor("PROFESSOR5", "5555555", "PROFESSOR5@GMAIL.COM", cursos);
 			for (Curso c : cursos) { c.getListaProfessores().add(_professor5); }
 			listaProfessores.add(_professor5);
+	
 			
 			
-			
-			
-			///////////ALUNO CADASTRADO
-			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123", cursoSI);
-			cursoSI.adicionarAluno(_aluno);
-			listaAlunos.add(_aluno);
+			///////////CADASTRAR ALUNO PARA TESTAR O SISTEMA
+			Aluno _aluno = new Aluno("Diêgo Raian da Silva Ferreira", "000", "Diego@gmail.com", "admin123",cursoSI);
+			this.listaAlunos.add(_aluno);
+			cursoSI.getListaAlunos().add(_aluno);
+
 			
 		}
 	
@@ -94,9 +90,8 @@ public class Database implements InterfaceDatabase {
 
 
 		public ArrayList<Aluno> getListaAlunos() {
-			return listaAlunos;
+			return this.listaAlunos;
 		}
-
 
 
 		public void setListaAlunos(ArrayList<Aluno> listaAlunos) {
@@ -104,9 +99,8 @@ public class Database implements InterfaceDatabase {
 		}
 		
 		public ArrayList<Curso> getListaCursos() {
-			return listaCursos;
+			return this.listaCursos;
 		}
-
 
 
 		public void setListaCursos(ArrayList<Curso> listaCursos) {
@@ -125,7 +119,8 @@ public class Database implements InterfaceDatabase {
 			
 			String lista = "";
 			for(Aluno _aluno : _curso.getListaAlunos()) {
-				lista += _aluno.toString() + "\n";
+				lista += 	"Nome: " + _aluno.getNome() + "\n"
+						+	"Matrícula: " +_aluno.getMatricula();
 			}
 			return lista;
 		}

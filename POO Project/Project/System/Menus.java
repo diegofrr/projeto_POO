@@ -36,7 +36,7 @@ public class Menus implements InterfaceMenus {
 	public int menuSecundario(Aluno _alunoLogado){
 		while(true) {
 			try {
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome() + " ("+ _alunoLogado.getMatricula() +")\n\n" +
+				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome().split(" ")[0] + " ("+ _alunoLogado.getMatricula() +")\n\n" +
 
 													"1. AVALIAR PROFESSOR \n"+
 													"2. VER ESTATÍSTICAS DE UM PROFESSOR \n"+

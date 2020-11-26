@@ -1,9 +1,12 @@
 package Class;
 
+import java.util.ArrayList;
+
 public class Aluno extends Pessoa {
 
 	private Curso curso;
 	private String senha;
+	private ArrayList<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 	
 	public Aluno(String _nome, String _matricula, String _email, String _senha, Curso _curso) {
 		super(_nome, _matricula, _email);
@@ -30,6 +33,10 @@ public class Aluno extends Pessoa {
 
 	public void setCurso(Curso _curso) {
 		this.curso = _curso;
+	}
+	
+	public ArrayList<Avaliacao> getAvaliacoes(){
+		return this.avaliacoes;
 	}
 	
 	public String toString() {
