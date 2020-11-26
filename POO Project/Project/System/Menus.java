@@ -18,7 +18,6 @@ public class Menus implements InterfaceMenus {
 			int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"1. LOGAR NO SISTEMA \n" +
 																		"2. SE CADASTRAR \n"+
 																		"3. FECHAR PROGRAMA"));
-
 				
 				if( opcao < 1 || opcao > 3) {
 					throw new OpcaoInvalida();
