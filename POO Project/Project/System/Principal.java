@@ -6,6 +6,7 @@ import Class.Aluno;
 import Class.Curso;
 import Class.Professor;
 import Database.Database;
+import Exceptions.CampoVazio;
 import Exceptions.OpcaoInvalida;
 
 public class Principal {
@@ -30,42 +31,61 @@ public class Principal {
 						int op = menu.menuSecundario(_alunoLogado);
 
 						if (op == 1) {
-							String nome = JOptionPane.showInputDialog("Nome do professor");
-							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-							if (_prof == null) {
-								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente.");
-							} else {
-								sistema.avaliarProfessor(_alunoLogado, _prof);
-
-							}
-
-						} else if (op == 2) {
 							
-							String nome = JOptionPane.showInputDialog("Nome do professor");
-							Professor _prof = sistema.procurarProfessorPeloNome(nome);
-							
-							if (_prof == null) {
-								JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente");
-
-
-							} else if (sistema.profAvaliado(_prof)) {
-								String opc = menu.menuEstatisticasProfessor();
+							try {
+								String nome = JOptionPane.showInputDialog("Nome do professor");
+								if(nome == null || nome.equals("") || nome.equals(" ")) {throw new CampoVazio(); }
+								Professor _prof = sistema.procurarProfessorPeloNome(nome);
 								
-								if (opc.equals("1")) { JOptionPane.showMessageDialog(null, _prof.notas()); }
-								else if (opc.equals("2")) { JOptionPane.showMessageDialog(null, _prof.comentarios()); }
-								else { continue; }
-								
-							} else {
-								int option = JOptionPane.showConfirmDialog(null, "O professor, " + _prof.getNome()
-								+ ", ainda não foi avaliado. Deseja avaliá-lo agora? :)", null , JOptionPane.YES_NO_OPTION);
-								
-								if (option == 0) {
+								if (_prof == null) {
+									JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente.");
+								} else {
 									sistema.avaliarProfessor(_alunoLogado, _prof);
 
-								} else {
-									continue;
 								}
+								
+							}catch(CampoVazio ex){
+								JOptionPane.showMessageDialog(null, ex.getMessage());
 							}
+	
+							
+
+						} else if (op == 2) {
+							try {
+								String nome = JOptionPane.showInputDialog("Nome do professor");
+								if(nome == null || nome.equals(" ")) { throw new CampoVazio(); }
+								Professor _prof = sistema.procurarProfessorPeloNome(nome);
+								
+								if (_prof == null) {
+									JOptionPane.showMessageDialog(null, "Nenhum professor encontrado. Tente novamente");
+
+
+								} else if (sistema.profAvaliado(_prof)) {
+									String opc = menu.menuEstatisticasProfessor();
+									
+									if (opc.equals("1")) { JOptionPane.showMessageDialog(null, _prof.notas()); }
+									else if (opc.equals("2")) { JOptionPane.showMessageDialog(null, _prof.comentarios()); }
+									else { continue; }
+									
+								} else {
+									int option = JOptionPane.showConfirmDialog(null, "O professor, " + _prof.getNome()
+									+ ", ainda não foi avaliado. Deseja avaliá-lo agora? :)", null , JOptionPane.YES_NO_OPTION);
+									
+									if (option == 0) {
+										sistema.avaliarProfessor(_alunoLogado, _prof);
+
+									} else {
+										continue;
+									}
+								}
+								
+								
+								
+							}catch(CampoVazio ex) {
+								JOptionPane.showMessageDialog(null, ex.getMessage());
+							}
+							
+							
 								 	
 
 						} else if (op == 3) {
