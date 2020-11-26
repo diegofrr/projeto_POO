@@ -281,5 +281,12 @@ public class Sistema implements InterfaceSistema {
 		}
 
 	}
+	
+	public String dadosPessoais(Aluno alunoLogado) {
+		return 	"Aluno(a): " + alunoLogado.getNome() + "\n" +
+				"Matrícula: " + alunoLogado.getMatricula() + "\n" +
+				"E-mail: " + alunoLogado.getEmail() + "\n" +
+				"Curso: " + alunoLogado.getCurso().getNome();
+	}
 
 }

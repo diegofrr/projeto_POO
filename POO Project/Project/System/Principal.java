@@ -1,5 +1,7 @@
 package System;
 
+import java.awt.Menu;
+
 import javax.swing.JOptionPane;
 
 import Class.Aluno;
@@ -61,10 +63,10 @@ public class Principal {
 
 
 								} else if (sistema.profAvaliado(_prof)) {
-									String opc = menu.menuEstatisticasProfessor();
+									int opc = menu.menuEstatisticasProfessor();
 									
-									if (opc.equals("1")) { JOptionPane.showMessageDialog(null, _prof.notas()); }
-									else if (opc.equals("2")) { JOptionPane.showMessageDialog(null, _prof.comentarios()); }
+									if (opc == 1) { JOptionPane.showMessageDialog(null, _prof.notas()); }
+									else if (opc == 2) { JOptionPane.showMessageDialog(null, _prof.comentarios()); }
 									else { continue; }
 									
 								} else {
@@ -91,14 +93,14 @@ public class Principal {
 						} else if (op == 3) {
 							Curso _cursoAcessado = sistema.escolherCurso();
 							if (_cursoAcessado == null) continue;
-							String opcaoCurso = menu.menuAcessarCurso(_cursoAcessado);
-							if(opcaoCurso.equals("1")) {
+							int opcaoCurso = menu.menuAcessarCurso(_cursoAcessado);
+							if(opcaoCurso == 1) {
 								JOptionPane.showMessageDialog(null, sistema.database.listarProfessoresDeCurso(_cursoAcessado));
 								
-							}else if(opcaoCurso.equals("2")) {
+							}else if(opcaoCurso == 2) {
 								JOptionPane.showMessageDialog(null, sistema.database.listarAlunosDeCurso(_cursoAcessado));
 								
-							}
+							} 
 							
 						} else if (op == 4) {
 							JOptionPane.showMessageDialog(null, sistema.database.listarProfessores());
@@ -113,7 +115,25 @@ public class Principal {
 							
 						}
 						
-						else if (op == 7){
+						
+						else if (op == 7) {
+							while(true) {
+								
+							
+							int opcaoDados = menu.menuMeusDados();
+							if(opcaoDados == 1) { JOptionPane.showMessageDialog(null, sistema.dadosPessoais(_alunoLogado)); }
+							else if(opcaoDados == 2) {
+							
+							} else if(opcaoDados == 3){ break; }
+							
+							}
+							
+						}
+						
+						
+						
+						
+						else if (op == 8){
 							break;
 						}
 					}

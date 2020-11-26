@@ -51,18 +51,19 @@ public class Database implements InterfaceDatabase {
 			listaProfessores.add(professor2);
 			
 			
-			
 			//PROFESSOR 3:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoAntropologia));
 			Professor professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", cursos);
 			for (Curso c : cursos) { c.getListaProfessores().add(professor3); }
 			listaProfessores.add(professor3);
 			
+			
 			//PROFESSOR 4:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoAntropologia, cursoMatematica));
 			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM", cursos);
 			for (Curso c : cursos) { c.getListaProfessores().add(_professor4); }
 			listaProfessores.add(_professor4);
+			
 			
 			//PROFESSOR 5:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoLetras, cursoEcologia));
@@ -73,7 +74,7 @@ public class Database implements InterfaceDatabase {
 			
 			
 			
-			///////////TESTE
+			///////////ALUNO CADASTRADO
 			Aluno _aluno = new Aluno("Administrador", "000", "Admin@gmail.com", "admin123", cursoSI);
 			cursoSI.adicionarAluno(_aluno);
 			listaAlunos.add(_aluno);
