@@ -36,35 +36,35 @@ public class Database implements InterfaceDatabase {
 			 //PROFESSOR 1:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoSI, cursoCC));
 			Professor professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM", cursos);	
-			for (Curso c : cursos) { c.getListaProfessores().add(professor1);}
+			for (Curso c : cursos) { c.adicionarProfessor(professor1);}
 			listaProfessores.add(professor1);
 			
 			
 			//PROFESSOR 2:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoDesign));
 			Professor professor2 = new Professor("PROFESSOR2", "2222222", "PROFESSOR2@GMAIL.COM", cursos);
-			for (Curso c : cursos) { c.getListaProfessores().add(professor2); }
+			for (Curso c : cursos) { c.adicionarProfessor(professor2);; }
 			listaProfessores.add(professor2);
 			
 			
 			//PROFESSOR 3:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoAntropologia));
 			Professor professor3 = new Professor("PROFESSOR3", "3333333", "PROFESSOR3@GMAIL.COM", cursos);
-			for (Curso c : cursos) { c.getListaProfessores().add(professor3); }
+			for (Curso c : cursos) { c.adicionarProfessor(professor3); }
 			listaProfessores.add(professor3);
 			
 			
 			//PROFESSOR 4:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoAntropologia, cursoMatematica));
 			Professor _professor4 = new Professor("PROFESSOR4", "4444444", "PROFESSOR4@GMAIL.COM", cursos);
-			for (Curso c : cursos) { c.getListaProfessores().add(_professor4); }
+			for (Curso c : cursos) { c.adicionarProfessor(_professor4); }
 			listaProfessores.add(_professor4);
 			
 			
 			//PROFESSOR 5:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoLetras, cursoEcologia));
 			Professor _professor5 = new Professor("PROFESSOR5", "5555555", "PROFESSOR5@GMAIL.COM", cursos);
-			for (Curso c : cursos) { c.getListaProfessores().add(_professor5); }
+			for (Curso c : cursos) { c.adicionarProfessor(_professor5); }
 			listaProfessores.add(_professor5);
 	
 			
@@ -72,7 +72,7 @@ public class Database implements InterfaceDatabase {
 			///////////CADASTRAR ALUNO PARA TESTAR O SISTEMA
 			Aluno _aluno = new Aluno("Diêgo Raian da Silva Ferreira", "000", "Diego@gmail.com", "admin123",cursoSI);
 			this.listaAlunos.add(_aluno);
-			cursoSI.getListaAlunos().add(_aluno);
+			cursoSI.adicionarAluno(_aluno);
 
 			
 		}

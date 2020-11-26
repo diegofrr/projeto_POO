@@ -1,6 +1,6 @@
 package Class;
 
-public class Avaliacao {
+public class  Avaliacao{
 	private double metodologiaEnsino;
 	private double qualidadeMateriais;
 	private double interacaoTurma;

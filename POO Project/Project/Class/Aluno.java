@@ -39,6 +39,10 @@ public class Aluno extends Pessoa {
 		return this.avaliacoes;
 	}
 	
+	public void adicionarAvaliacao(Avaliacao av) {
+		this.avaliacoes.add(av);
+	}
+	
 	public String toString() {
 		return "Nome: " + getNome() + "\n" 
 				+ "Matrícula: " + getMatricula() + "\n"

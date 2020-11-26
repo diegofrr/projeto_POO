@@ -18,12 +18,12 @@ public class Professor extends Pessoa{
 		this.listaCursos = new ArrayList<Curso>();
 	}
 
-	public ArrayList<Curso> getListaCursos() {
-		return listaCursos;
+	public void adicionarAvaliacao(Avaliacao av) {
+		this.avaliacoesRecebidas.add(av);
 	}
 	
-	public void setListaCursos(ArrayList<Curso> listaCursos) {
-		this.listaCursos = listaCursos;
+	public ArrayList<Curso> getListaCursos() {
+		return listaCursos;
 	}
 	
 	public String listarCursos() {

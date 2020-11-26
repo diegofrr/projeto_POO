@@ -189,8 +189,8 @@ public class Sistema implements InterfaceSistema {
 				
 				Avaliacao _avaliacao = new Avaliacao(notaMetodologiaEnsino, notaQualMateriais, notaInteracaoTurma, notaFidelidadeMaterial, notaRecomendacao, mensagem, _aluno, prof, alunoAnonimo);
 				JOptionPane.showMessageDialog(null, "Avaliação feita com sucesso, obrigado!");
-				prof.getAvaliacoesRecebidas().add(_avaliacao);
-				_aluno.getAvaliacoes().add(_avaliacao);
+				prof.adicionarAvaliacao(_avaliacao);
+				_aluno.adicionarAvaliacao(_avaliacao);
 				break;
 
 				// chamada de erro caso o aluno não informe um número nos inputs das notas mais
