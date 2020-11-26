@@ -10,5 +10,5 @@ public interface InterfaceMenus {
 	public int menuSecundario(Aluno _alunoLogado) throws OpcaoInvalida;
 	public int menuPrincipal() throws OpcaoInvalida;
 	public int menuEstatisticasProfessor();
-	
+	public int menuMeusDados();
 }
