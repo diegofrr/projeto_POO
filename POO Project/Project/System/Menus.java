@@ -12,7 +12,7 @@ public class Menus implements InterfaceMenus {
 	public static final String ERRO_OPCAO_INVALIDA = "Opção inválida!";
 	
 	
-	public int menuPrincipal() throws OpcaoInvalida  {
+	public int menuPrincipal(){
 		while(true) {
 			try {
 			int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"1. LOGAR NO SISTEMA \n" +
@@ -33,7 +33,7 @@ public class Menus implements InterfaceMenus {
 		
 	}
 	
-	public int menuSecundario(Aluno _alunoLogado) throws OpcaoInvalida {
+	public int menuSecundario(Aluno _alunoLogado){
 		while(true) {
 			try {
 				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome() + " ("+ _alunoLogado.getMatricula() +")\n\n" +
@@ -64,7 +64,7 @@ public class Menus implements InterfaceMenus {
 
 	}
 	
-	public int menuAcessarCurso(Curso _cursoAcessado) {
+	public int menuAcessarCurso(Curso _cursoAcessado){
 		while(true) {
 			try {
 				int opcao = Integer.parseInt(JOptionPane.showInputDialog("Curso: " + _cursoAcessado.getNome() + "\n\n" +
@@ -90,7 +90,7 @@ public class Menus implements InterfaceMenus {
 	}
 	
 	
-	public int menuEstatisticasProfessor() {
+	public int menuEstatisticasProfessor(){
 		while(true) {
 			try {
 				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"1. NOTAS \n"+
