@@ -12,6 +12,7 @@ public interface InterfaceSistema {
 	public Aluno alunoLogado(String matricula);
 	public String rankingProfessores();
 	public String dadosPessoais(Aluno alunoLogado);
+	public String listarAlunos();
 	public boolean login(String matricula, String senha);
 	public boolean cadastrarAluno();
 	public boolean notaValida(double nota);
@@ -20,6 +21,7 @@ public interface InterfaceSistema {
 	public void avaliarProfessor(Aluno _aluno, Professor prof);
 	public void atualizarSenha(Aluno alunoLogado);
 	public void atualizarEmail(Aluno alunoLogado);
+	public void avaliacoesFeitas(Aluno aluno);
 
 
 }
