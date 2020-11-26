@@ -169,13 +169,11 @@ public class Sistema implements InterfaceSistema {
 				boolean alunoAnonimo = false;
 				
 				int dxMensagem = JOptionPane.showConfirmDialog(null, "Deseja deixar um comentário sobre o professor?", null, JOptionPane.YES_NO_OPTION);
-				int anonimo = JOptionPane.showConfirmDialog(null, "Comentar anonimamente?", null, JOptionPane.YES_NO_OPTION);
-				
-				if (anonimo == 0) {
-					alunoAnonimo = true;
-				} 
+
 				
 				if (dxMensagem == 0) {
+					int anonimo = JOptionPane.showConfirmDialog(null, "Comentar anonimamente?", null, JOptionPane.YES_NO_OPTION);
+					if(anonimo == 0) { alunoAnonimo = true; }
 					mensagem = JOptionPane.showInputDialog("Seu comentário");
 					
 					try {
