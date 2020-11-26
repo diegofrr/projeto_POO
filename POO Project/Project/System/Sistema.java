@@ -10,8 +10,10 @@ import Class.Curso;
 import Class.Professor;
 import Database.Database;
 import Exceptions.CampoVazio;
+import Exceptions.ContemEspacos;
 import Exceptions.EmailIgual;
 import Exceptions.EmailInvalido;
+import Exceptions.MatriculaInvalida;
 import Exceptions.NotaInvalida;
 import Exceptions.OpcaoInvalida;
 import Exceptions.QuantCaracteres;
@@ -20,12 +22,6 @@ import Interfaces.InterfaceSistema;
 
 public class Sistema implements InterfaceSistema {
 	Database database = new Database();
-
-	public static final String NOME_INVALIDO = "Nome inválido!";
-	public static final String MATRICULA_INVALIDA = "Matrícula inválida!";
-	public static final String EMAIL_INVALIDO = "E-mail inválido!";
-	public static final String SENHA_INVALIDA = "Senha inválida! Por favor, não utilize espaços.";
-
 	
 	// ESCOLHE UM CURSO DISPONÍVEL
 	public Curso escolherCurso() {
@@ -39,43 +35,53 @@ public class Sistema implements InterfaceSistema {
 
 	// CADASTRA ALUNO
 	public boolean cadastrarAluno() {
-		String nome = JOptionPane.showInputDialog("Nome").trim().replaceAll("( +)", " ");
-		if (nome.equals("")) {
-			JOptionPane.showMessageDialog(null, NOME_INVALIDO);
-			return false;
-		}
+		try {
+		String nome = JOptionPane.showInputDialog("Nome completo").trim().replaceAll("( +)", " ");
+		if(nome == null || nome.equals(" "))	{ throw new CampoVazio();}
+		else if(nome.length() < 10) 			{ throw new QuantCaracteres("O nome", 10); }
+
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
-		if (matricula.equals("")) {
-			JOptionPane.showMessageDialog(null, MATRICULA_INVALIDA);
-			return false;
-		}
-
-		// verifica se já existe uma mesma matrícula cadastrada
+		if(matricula == null || matricula.equals(" "))	{ throw new CampoVazio(); }
+		else if(matricula.length() != 8) 				{ throw new MatriculaInvalida(); }
 		for (Aluno _aluno : database.getListaAlunos()) {
 			if (_aluno.getMatricula().equals(matricula)) {
 				JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema");
 				return false;
 			}
 		}
+		
 		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "");
-		if (email.equals("")) {
-			JOptionPane.showMessageDialog(null, EMAIL_INVALIDO);
-			return false;
-		}
+		if(email == null || email.equals(" "))	{ throw new CampoVazio(); }
+		else if(email.contains(" "))			{ throw new ContemEspacos("O e-mail"); }
+		else if(!email.contains("@gmail") 	&&
+				!email.contains("@outlook") &&
+				!email.contains("@bol") 	&&
+				!email.contains("@hotmail")) 	{ throw new EmailInvalido(email); }
+		
 
 		String senha = JOptionPane.showInputDialog("Senha de acesso (não use espaços)");
-		String _senha = senha.trim().replaceAll("( +)", "");
-		if (!senha.equals(_senha)) {
-			JOptionPane.showMessageDialog(null, SENHA_INVALIDA);
-			return false;
-		}
+		if(senha.length() < 6) 						{ throw new QuantCaracteres("A senha", 6); }
+		else if(senha.contains(" ")) 				{ throw new ContemEspacos("A senha"); }
+		else if(senha == null || senha.equals(" ")) { throw new CampoVazio(); }
 
 		Curso curso = this.escolherCurso();
 		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
 		database.getListaAlunos().add(aluno);
 		curso.adicionarAluno(aluno);
 		return true;
+
+		}catch(QuantCaracteres ex){
+			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+		}catch(ContemEspacos ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+		}catch(EmailInvalido ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+		}catch(CampoVazio ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+		}catch(MatriculaInvalida ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+		}
 	}
 
 	// LISTAR ALUNOS
@@ -287,7 +293,7 @@ public class Sistema implements InterfaceSistema {
 	}
 	
 	public String dadosPessoais(Aluno alunoLogado) {
-		return 	"Aluno(a): " + alunoLogado.getNome() + "\n" +
+		return 	"Nome: " + alunoLogado.getNome() + "\n" +
 				"Matrícula: " + alunoLogado.getMatricula() + "\n" +
 				"E-mail: " + alunoLogado.getEmail() + "\n" +
 				"Curso: " + alunoLogado.getCurso().getNome();
@@ -296,7 +302,7 @@ public class Sistema implements InterfaceSistema {
 	public void atualizarSenha(Aluno alunoLogado) {
 		try {
 			String novaSenha = JOptionPane.showInputDialog("Nova senha").trim().replaceAll("( +)", "");
-			if(novaSenha.length() < 5) 							throw new QuantCaracteres(5); 
+			if(novaSenha.length() < 6) 							throw new QuantCaracteres("A senha", 6); 
 			else if(novaSenha.equals(alunoLogado.getSenha())) 	throw new SenhaIgual();
 			else alunoLogado.setSenha(novaSenha); JOptionPane.showMessageDialog(null, "Senha alterada com sucesso\n"
 																					+ "Sua nova senha é: " + novaSenha);

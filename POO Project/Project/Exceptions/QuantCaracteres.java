@@ -7,9 +7,9 @@ public class QuantCaracteres extends Exception {
 	private String msg;
 	
 	
-	public QuantCaracteres(int quant) {
+	public QuantCaracteres(String dado, int quant) {
 		super();
-		this.msg = "A senha precisa ter pelo menos "+ quant + " caracteres!";
+		this.msg = dado + " precisa ter pelo menos "+ quant + " caracteres!";
 		
 	}
 	
