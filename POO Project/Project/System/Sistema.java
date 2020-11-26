@@ -84,13 +84,7 @@ public class Sistema implements InterfaceSistema {
 	}
 
 	// LISTAR ALUNOS
-	public String listarAlunos() {
-		String lista = "";
-		for (Aluno _aluno : database.getListaAlunos()) {
-			lista += _aluno.toString() + "\n\n";
-		}
-		return lista;
-	}
+
 
 	// PROCURA UM PROFESSOR PELO NOME
 	public Professor procurarProfessorPeloNome(String nome) {
