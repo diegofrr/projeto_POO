@@ -83,8 +83,6 @@ public class Sistema implements InterfaceSistema {
 		}
 	}
 
-	// LISTAR ALUNOS
-
 
 	// PROCURA UM PROFESSOR PELO NOME
 	public Professor procurarProfessorPeloNome(String nome) {
@@ -226,6 +224,7 @@ public class Sistema implements InterfaceSistema {
 
 	}
 	
+	// PRINTA AS AVALIAÇÕES FEITAS PELO ALUNO RECEBIDO NO PARÂMETRO
 	public void avaliacoesFeitas(Aluno aluno) {
 		ArrayList<Avaliacao> listaAvaliacoes = aluno.getAvaliacoes();
 		if(listaAvaliacoes.size() == 0) {JOptionPane.showMessageDialog(null, "Você ainda não avaliou nenhum professor!"); return;}
@@ -257,6 +256,7 @@ public class Sistema implements InterfaceSistema {
 		return true;
 	}
 
+	// VOLTA UMA STRING CONTENDO O RANKING DOS PROFESSORES
 	public String rankingProfessores() {
 		String ranking = "";
 		int cont = 1;
@@ -290,6 +290,7 @@ public class Sistema implements InterfaceSistema {
 
 	}
 	
+	// RETORNA UMA LISTA COM OS DADOS PESSOAS DO ALUNO RECEBIDO NO PARÂMETRO
 	public String dadosPessoais(Aluno alunoLogado) {
 		return 	"Nome: " + alunoLogado.getNome() + "\n" +
 				"Matrícula: " + alunoLogado.getMatricula() + "\n" +
@@ -297,6 +298,8 @@ public class Sistema implements InterfaceSistema {
 				"Curso: " + alunoLogado.getCurso().getNome();
 	}
 	
+	// ATUALIZA A SENHA DO ALUNO RECEBIDO NO PARÂMETRO
+	// O MÉTODO EXIGE A CONFIRMAÇÃO DA SENHA ATUAL PARA PODER PROSSEGUIR PARA A ATTUALIZAÇÃO DA SENHA
 	public void atualizarSenha(Aluno alunoLogado) {
 		String confirmarSenha = JOptionPane.showInputDialog("Confirme sua senha atual");
 		if(!confirmarSenha.equals(alunoLogado.getSenha())) {JOptionPane.showMessageDialog(null, "A senha não confere!"); return;}
@@ -315,6 +318,9 @@ public class Sistema implements InterfaceSistema {
 		}
 	}
 	
+	
+	// ATUALIZA O E-MAIL DO ALUNO RECEBIDO NO PARÂMETRO
+	// O SISTEMA EXIGE QUE O ALUNO FORNEÇA UM E-MAIL VÁLIDO
 	public void atualizarEmail(Aluno alunoLogado) {
 		try {
 			String novoEmail = JOptionPane.showInputDialog("Novo e-mail").trim().replaceAll("( +)", "");
@@ -323,10 +329,9 @@ public class Sistema implements InterfaceSistema {
 					!novoEmail.contains("@outlook.com") &&
 					!novoEmail.contains("@hotmail.com") &&
 					!novoEmail.contains("@dcx.ufpb.br")) throw new EmailInvalido(novoEmail);
-			else alunoLogado.setEmail(novoEmail); JOptionPane.showMessageDialog(null, "E-mail alterado com sucesso\n"
-					+ "Seu novo e-mail é: " + novoEmail);
-			
-			
+			else alunoLogado.setEmail(novoEmail); JOptionPane.showMessageDialog(null, "E-mail alterado com sucesso\n" 
+																					+ "Seu novo e-mail é: " + novoEmail);
+		
 		}catch(EmailIgual ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());
 		}catch(EmailInvalido ex){
