@@ -1,23 +1,23 @@
-package System;
+package system;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-import Class.Aluno;
-import Class.Avaliacao;
-import Class.Curso;
-import Class.Professor;
-import Database.Database;
-import Exceptions.CampoVazio;
-import Exceptions.ContemEspacos;
-import Exceptions.ContemNumero;
-import Exceptions.EmailIgual;
-import Exceptions.EmailInvalido;
-import Exceptions.MatriculaInvalida;
-import Exceptions.NotaInvalida;
-import Exceptions.QuantCaracteres;
-import Exceptions.SenhaIgual;
-import Interfaces.InterfaceSistema;
+import classes.Aluno;
+import classes.Avaliacao;
+import classes.Curso;
+import classes.Professor;
+import database.Database;
+import exceptions.CampoVazio;
+import exceptions.ContemEspacos;
+import exceptions.ContemNumero;
+import exceptions.EmailIgual;
+import exceptions.EmailInvalido;
+import exceptions.MatriculaInvalida;
+import exceptions.NotaInvalida;
+import exceptions.QuantCaracteres;
+import exceptions.SenhaIgual;
+import interfaces.InterfaceSistema;
 
 public class Sistema implements InterfaceSistema {
 	Database database = new Database();

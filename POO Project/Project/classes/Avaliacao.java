@@ -1,4 +1,4 @@
-package Class;
+package classes;
 
 public class  Avaliacao{
 	private double metodologiaEnsino;

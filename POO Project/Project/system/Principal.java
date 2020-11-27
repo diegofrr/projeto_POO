@@ -1,13 +1,13 @@
-package System;
+package system;
 
 
 import javax.swing.JOptionPane;
 
-import Class.Aluno;
-import Class.Curso;
-import Class.Professor;
-import Exceptions.CampoVazio;
-import Exceptions.OpcaoInvalida;
+import classes.Aluno;
+import classes.Curso;
+import classes.Professor;
+import exceptions.CampoVazio;
+import exceptions.OpcaoInvalida;
 
 public class Principal {
 

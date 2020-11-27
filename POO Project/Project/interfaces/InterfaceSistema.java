@@ -1,9 +1,9 @@
-package Interfaces;
+package interfaces;
 
 
-import Class.Aluno;
-import Class.Curso;
-import Class.Professor;
+import classes.Aluno;
+import classes.Curso;
+import classes.Professor;
 
 public interface InterfaceSistema {
 	

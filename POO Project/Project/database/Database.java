@@ -1,9 +1,9 @@
-package Database;
+package database;
 
-import Class.Aluno;
-import Class.Curso;
-import Class.Professor;
-import Interfaces.InterfaceDatabase;
+import classes.Aluno;
+import classes.Curso;
+import classes.Professor;
+import interfaces.InterfaceDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;

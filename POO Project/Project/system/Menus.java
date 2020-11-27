@@ -1,11 +1,11 @@
-package System;
+package system;
 
 import javax.swing.JOptionPane;
 
-import Class.Aluno;
-import Class.Curso;
-import Interfaces.InterfaceMenus;
-import Exceptions.OpcaoInvalida;
+import classes.Aluno;
+import classes.Curso;
+import interfaces.InterfaceMenus;
+import exceptions.OpcaoInvalida;
 
 public class Menus implements InterfaceMenus {
 	

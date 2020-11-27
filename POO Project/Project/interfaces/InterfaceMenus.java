@@ -1,8 +1,8 @@
-package Interfaces;
+package interfaces;
 
-import Class.Aluno;
-import Class.Curso;
-import Exceptions.OpcaoInvalida;
+import classes.Aluno;
+import classes.Curso;
+import exceptions.OpcaoInvalida;
 
 public interface InterfaceMenus {
 

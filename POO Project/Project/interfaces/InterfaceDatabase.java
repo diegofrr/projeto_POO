@@ -1,6 +1,6 @@
-package Interfaces;
+package interfaces;
 
-import Class.Curso;
+import classes.Curso;
 
 public interface InterfaceDatabase {
 

@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class ContemEspacos extends Exception {
 	private String msg;
