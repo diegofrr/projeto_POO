@@ -42,14 +42,14 @@ public class Sistema implements InterfaceSistema {
 	public boolean cadastrarAluno() {
 		try {
 		String nome = JOptionPane.showInputDialog("Nome completo").trim().replaceAll("( +)", " ");
-		if(contemNumero(nome))					{ throw new ContemNumero();}
-		if(nome == null || nome.equals(" "))	{ throw new CampoVazio();}
-		else if(nome.length() < 10) 			{ throw new QuantCaracteres("O nome", 10); }
+		if(contemNumero(nome))					 throw new ContemNumero();
+		if(nome == null || nome.equals(" "))	 throw new CampoVazio();
+		else if(nome.length() < 10) 			 throw new QuantCaracteres("O nome", 10); 
 
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
-		if(matricula == null || matricula.equals(" "))	{ throw new CampoVazio(); }
-		else if(matricula.length() != 8) 				{ throw new MatriculaInvalida(); }
+		if(matricula == null || matricula.equals(" "))	 throw new CampoVazio(); 
+		else if(matricula.length() != 8) 				 throw new MatriculaInvalida(); 
 		for (Aluno _aluno : database.getListaAlunos()) {
 			if (_aluno.getMatricula().equals(matricula)) {
 				JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema");
@@ -58,18 +58,18 @@ public class Sistema implements InterfaceSistema {
 		}
 		
 		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "");
-		if(email == null || email.equals(" "))	{ throw new CampoVazio(); }
-		else if(email.contains(" "))			{ throw new ContemEspacos("O e-mail"); }
+		if(email == null || email.equals(" "))	 	throw new CampoVazio(); 
+		else if(email.contains(" "))			 	throw new ContemEspacos("O e-mail"); 
 		else if(!email.contains("@gmail.com") 	&&
 				!email.contains("@outlook.com") &&
 				!email.contains("@hotmail.com") &&
-				!email.contains("@dcx.ufpb.br")){ throw new EmailInvalido(email); }
+				!email.contains("@dcx.ufpb.br"))	throw new EmailInvalido(email); 
 		
 
 		String senha = JOptionPane.showInputDialog("Senha de acesso (mín. 6 caracteres)");
-		if(senha.length() < 6) 						{ throw new QuantCaracteres("A senha", 6); }
-		else if(senha.contains(" ")) 				{ throw new ContemEspacos("A senha"); }
-		else if(senha == null || senha.equals(" ")) { throw new CampoVazio(); }
+		if(senha.length() < 6) 						 throw new QuantCaracteres("A senha", 6); 
+		else if(senha.contains(" ")) 				 throw new ContemEspacos("A senha"); 
+		else if(senha == null || senha.equals(" "))  throw new CampoVazio(); 
 
 		Curso curso = this.escolherCurso();
 		Aluno aluno = new Aluno(nome, matricula, email, senha, curso);
@@ -146,26 +146,26 @@ public class Sistema implements InterfaceSistema {
 			}
 
 			// aqui se segue o código caso o aluno ainda não tenha avaliado o professor
+			JOptionPane.showMessageDialog(null, "LEIA COM ATENÇÃO! \n"
+					+ "a. Você está entrando na aba de avaliação do prof. " + prof.getNome() + "\n"
+					+ "b. Informe as notas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo \n"
+					+ "c. Caso queira sair do espaço de avaliação, pressione cancelar mais a seguir");
 			try {
-				JOptionPane.showMessageDialog(null, "LEIA COM ATENÇÃO! \n"
-						+ "a. Você está entrando na aba de avaliação do prof. " + prof.getNome() + "\n"
-						+ "b. Informe as notas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo \n"
-						+ "c. Caso queira sair do espaço de avaliação, pressione cancelar mais a seguir");
 
 				double notaMetodologiaEnsino = Double.parseDouble(JOptionPane.showInputDialog("Metodologia de ensino"));
-				if (!notaValida(notaMetodologiaEnsino)) { throw new NotaInvalida();}
+				if (!notaValida(notaMetodologiaEnsino))		throw new NotaInvalida();
 				
 				double notaQualMateriais = Double.parseDouble(JOptionPane.showInputDialog("Qualidade dos materiais"));
-				if (!notaValida(notaQualMateriais)) { throw new NotaInvalida();}
+				if (!notaValida(notaQualMateriais))  		throw new NotaInvalida();
 				
 				double notaInteracaoTurma = Double.parseDouble(JOptionPane.showInputDialog("Interação com a turma"));
-				if (!notaValida(notaInteracaoTurma)) { throw new NotaInvalida();}
+				if (!notaValida(notaInteracaoTurma))  		throw new NotaInvalida();
 				
 				double notaFidelidadeMaterial = Double.parseDouble(JOptionPane.showInputDialog("Fiderelidade do prof. com o material"));
-				if (!notaValida(notaFidelidadeMaterial)) { throw new NotaInvalida();}
+				if (!notaValida(notaFidelidadeMaterial))	throw new NotaInvalida();
 				
 				double notaRecomendacao = Double.parseDouble(JOptionPane.showInputDialog("Quanto você recomenda o professor"));
-				if (!notaValida(notaRecomendacao)) { throw new NotaInvalida();}
+				if (!notaValida(notaRecomendacao)) 			throw new NotaInvalida();
 				
 				String mensagem = null;
 				boolean alunoAnonimo = false;
@@ -198,10 +198,7 @@ public class Sistema implements InterfaceSistema {
 				// chamada de erro caso o aluno não informe um número nos inputs das notas mais
 				// acima
 			} catch (NumberFormatException  ex) {
-				JOptionPane.showMessageDialog(null,
-						"Por favor, informe apenas números");
-				break;
-
+				JOptionPane.showMessageDialog(null, "Por favor, informe apenas números");
 			} catch (NotaInvalida ex) {
 				JOptionPane.showMessageDialog(null, ex.getMessage());
 			} catch (Exception ex) {
