@@ -113,13 +113,11 @@ public class Sistema implements InterfaceSistema {
 			if(nome.contains(Integer.toString(n))) return true;
 		}
 		return false;
-
 	}
 
 	public boolean contemLetra(String matricula) {
 		for(char letra = 'a'; letra <= 'z'; letra++) {
-			String letraStr = String.valueOf(letra);
-			if(matricula.contains(letraStr)) {return true;}
+			if(matricula.contains(String.valueOf(letra))) return true;
 		}
 		return false;
 	}
