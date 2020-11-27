@@ -27,7 +27,6 @@ public class Principal {
 					Aluno _alunoLogado = sistema.alunoLogado(matricula);
 					JOptionPane.showMessageDialog(null, "Bem vindo, " + _alunoLogado.getNome().split(" ")[0] + "!");
 
-					
 					// DEPOIS DO ALUNO LOGAR NO SISTEMA
 					while (true) {
 						int op = menu.menuSecundario(_alunoLogado);
@@ -63,11 +62,12 @@ public class Principal {
 
 
 								} else if (sistema.profAvaliado(_prof)) {
+									while (true){
 									int opc = menu.menuEstatisticasProfessor();
-									
-									if (opc == 1) { JOptionPane.showMessageDialog(null, _prof.notas()); }
-									else if (opc == 2) { JOptionPane.showMessageDialog(null, _prof.comentarios()); }
-									else { continue; }
+									if		(opc == 1)  JOptionPane.showMessageDialog(null, _prof.notas());  
+									else if	(opc == 2)  JOptionPane.showMessageDialog(null, _prof.comentarios()); 
+									else	break;
+									}
 									
 								} else {
 									int option = JOptionPane.showConfirmDialog(null, "O professor, " + _prof.getNome()
@@ -86,21 +86,17 @@ public class Principal {
 							}catch(CampoVazio ex) {
 								JOptionPane.showMessageDialog(null, ex.getMessage());
 							}
-							
-							
-								 	
+									 	
 
 						} else if (op == 3) {
 							Curso _cursoAcessado = sistema.escolherCurso();
 							if (_cursoAcessado == null) continue;
+							while(true) {
 							int opcaoCurso = menu.menuAcessarCurso(_cursoAcessado);
-							if(opcaoCurso == 1) {
-								JOptionPane.showMessageDialog(null, sistema.database.listarProfessoresDeCurso(_cursoAcessado));
-								
-							}else if(opcaoCurso == 2) {
-								JOptionPane.showMessageDialog(null, sistema.database.listarAlunosDeCurso(_cursoAcessado));
-								
-							} 
+							if		(opcaoCurso == 1) 	JOptionPane.showMessageDialog(null, sistema.database.listarProfessoresDeCurso(_cursoAcessado));
+							else if	(opcaoCurso == 2) 	JOptionPane.showMessageDialog(null, sistema.database.listarAlunosDeCurso(_cursoAcessado));	
+							else if	(opcaoCurso == 3)	break;
+							}
 							
 						} else if (op == 4) {
 							JOptionPane.showMessageDialog(null, sistema.database.listarProfessores());
@@ -139,9 +135,6 @@ public class Principal {
 							}
 							
 						}
-						
-						
-						
 						
 						else if (op == 8){
 							break;

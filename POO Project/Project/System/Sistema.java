@@ -140,7 +140,7 @@ public class Sistema implements InterfaceSistema {
 				JOptionPane.showMessageDialog(null, "LEIA COM ATENÇÃO! \n"
 						+ "a. Você está entrando na aba de avaliação do prof. " + prof.getNome() + "\n"
 						+ "b. Informe as notas a seguir de 0 a 10, sendo 0 péssimo e 10 ótimo \n"
-						+ "c. Caso queira sair desta janela, informe uma letra qualquer nas notas exigidas a seguir");
+						+ "c. Caso queira sair do espaço de avaliação, pressione cancelar mais a seguir");
 
 				double notaMetodologiaEnsino = Double.parseDouble(JOptionPane.showInputDialog("Metodologia de ensino"));
 				if (!notaValida(notaMetodologiaEnsino)) { throw new NotaInvalida();}

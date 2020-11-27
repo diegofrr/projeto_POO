@@ -134,12 +134,14 @@ public class  Avaliacao{
 	}
 	
 	public String toString() {
+		String coment = "";
+		if(this.getMensagem() != null) coment = "Comentário: " + this.mensagem;
 		return 	"Metedologia de ensino: " 		+ this.metodologiaEnsino + "\n" +
 				"Qualidade dos materiais " 		+ this.qualidadeMateriais + "\n" +
 				"Interação com a turma " 		+ this.interacaoTurma + "\n" +
 				"Fidelidade com o cronograma " 	+ this.fidelidadeCronograma + "\n" +
 				"Recomendação " 				+ this.recomendacao + "\n\n" +
-				"Comentário: " 					+ this.mensagem;
+				coment;
 	}
 	
 }

@@ -33,7 +33,7 @@ public class Database implements InterfaceDatabase {
 			 
 			 ArrayList<Curso> cursos;
 			 
-			 //PROFESSOR 1:
+			//PROFESSOR 1:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoSI, cursoCC));
 			Professor professor1 = new Professor("PROFESSOR1", "1111111", "PROFESSOR1@GMAIL.COM", cursos);	
 			for (Curso c : cursos) { c.adicionarProfessor(professor1);}
