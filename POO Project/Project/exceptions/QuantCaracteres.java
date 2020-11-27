@@ -1,6 +1,10 @@
 package exceptions;
 
 public class QuantCaracteres extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String msg;
 	
 	public QuantCaracteres(String dado, int quant) {
