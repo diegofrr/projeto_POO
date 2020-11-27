@@ -10,6 +10,7 @@ import Class.Professor;
 import Database.Database;
 import Exceptions.CampoVazio;
 import Exceptions.ContemEspacos;
+import Exceptions.ContemNumero;
 import Exceptions.EmailIgual;
 import Exceptions.EmailInvalido;
 import Exceptions.MatriculaInvalida;
@@ -30,11 +31,18 @@ public class Sistema implements InterfaceSistema {
 		return (Curso) valorSelecionado;	
 	}
 
+	public boolean contemNumero(String nome) {
+		if(	nome.contains("1") || nome.contains("2") || nome.contains("3") ||
+			nome.contains("4") || nome.contains("5") || nome.contains("6") ||
+			nome.contains("7") || nome.contains("8") || nome.contains("9")) {return true;}
+		return false;
+	}
 
 	// CADASTRA ALUNO
 	public boolean cadastrarAluno() {
 		try {
 		String nome = JOptionPane.showInputDialog("Nome completo").trim().replaceAll("( +)", " ");
+		if(contemNumero(nome))					{ throw new ContemNumero();}
 		if(nome == null || nome.equals(" "))	{ throw new CampoVazio();}
 		else if(nome.length() < 10) 			{ throw new QuantCaracteres("O nome", 10); }
 
@@ -79,7 +87,9 @@ public class Sistema implements InterfaceSistema {
 			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
 		}catch(MatriculaInvalida ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
-		}catch(Exception ex) { return false;
+		}catch(ContemNumero ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+		} catch(Exception ex) { return false;
 		}
 	}
 
