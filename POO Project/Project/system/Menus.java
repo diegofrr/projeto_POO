@@ -11,7 +11,6 @@ public class Menus implements InterfaceMenus {
 	
 	public static final String ERRO_OPCAO_INVALIDA = "Opção inválida!";
 	
-	
 	public int menuPrincipal(){
 		while(true) {
 			try {
@@ -89,7 +88,6 @@ public class Menus implements InterfaceMenus {
 		}
 	}
 	
-	
 	public int menuEstatisticasProfessor(){
 		while(true) {
 			try {
@@ -112,8 +110,7 @@ public class Menus implements InterfaceMenus {
 		
 		}
 	}
-		
-	
+
 	public int menuMeusDados() {
 		while(true) {
 			try {

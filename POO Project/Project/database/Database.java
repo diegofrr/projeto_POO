@@ -81,18 +81,13 @@ public class Database implements InterfaceDatabase {
 			return listaProfessores;
 		}
 
-
-
 		public void setListaProfessores(ArrayList<Professor> listaProfessores) {
 			this.listaProfessores = listaProfessores;
 		}
 
-
-
 		public ArrayList<Aluno> getListaAlunos() {
 			return this.listaAlunos;
 		}
-
 
 		public void setListaAlunos(ArrayList<Aluno> listaAlunos) {
 			this.listaAlunos = listaAlunos;
@@ -101,7 +96,6 @@ public class Database implements InterfaceDatabase {
 		public ArrayList<Curso> getListaCursos() {
 			return this.listaCursos;
 		}
-
 
 		public void setListaCursos(ArrayList<Curso> listaCursos) {
 			this.listaCursos = listaCursos;

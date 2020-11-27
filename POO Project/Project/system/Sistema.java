@@ -10,6 +10,7 @@ import classes.Professor;
 import database.Database;
 import exceptions.CampoVazio;
 import exceptions.ContemEspacos;
+import exceptions.ContemLetra;
 import exceptions.ContemNumero;
 import exceptions.EmailIgual;
 import exceptions.EmailInvalido;
@@ -22,7 +23,43 @@ import interfaces.InterfaceSistema;
 public class Sistema implements InterfaceSistema {
 	Database database = new Database();
 	
-	// ESCOLHE UM CURSO DISPONÍVEL
+	public Aluno alunoLogado(String matricula) {
+		for (Aluno _aluno : database.getListaAlunos()) {
+			if (_aluno.getMatricula().equals(matricula)) {
+				// caso encontre, retorna o Aluno;
+				return _aluno;
+			}
+		}
+		return null;
+	}
+
+	public Professor procurarProfessorPeloNome(String nome) {
+		ArrayList<Professor> profEncontrados = new ArrayList<Professor>();
+		for (Professor _prof : database.getListaProfessores()) {
+			if (_prof.getNome().toUpperCase().contains(nome.toUpperCase())) {
+				profEncontrados.add(_prof);
+			}
+		}
+		
+		if (profEncontrados.size() == 0) { return null; }
+		else if (profEncontrados.size() == 1) {
+			JOptionPane.showMessageDialog(null, "1 professor encontrado \n\n" + profEncontrados.get(0).toString());
+			return profEncontrados.get(0);
+		}
+
+
+		while (true) {
+			
+			Object[] professores = new Object[profEncontrados.size()];
+			for (int k = 0; k < profEncontrados.size(); k++) { professores[k] = profEncontrados.get(k); }
+			Object selectedValue = JOptionPane.showInputDialog(null, profEncontrados.size() 
+					+ " professores encontrados. \nEscolha um:", "Opção", JOptionPane.INFORMATION_MESSAGE, null, professores, professores[0]);
+			return (Professor) selectedValue;
+			
+		
+			}
+	}
+
 	public Curso escolherCurso() {
 		ArrayList<Curso> listaCursos = database.getListaCursos();
 		Object[] cursos = new Object[listaCursos.size()];
@@ -31,14 +68,62 @@ public class Sistema implements InterfaceSistema {
 		return (Curso) valorSelecionado;	
 	}
 
-	public boolean contemNumero(String nome) {
-		if(	nome.contains("1") || nome.contains("2") || nome.contains("3") ||
-			nome.contains("4") || nome.contains("5") || nome.contains("6") ||
-			nome.contains("7") || nome.contains("8") || nome.contains("9")) {return true;}
+	public String rankingProfessores() {
+		String ranking = "";
+		int cont = 1;
+		ArrayList<Professor> listaProfessoresAvaliados = new ArrayList<Professor>();
+		for (Professor _prof : database.getListaProfessores()) {
+			if (this.profAvaliado(_prof)) {
+				listaProfessoresAvaliados.add(_prof);
+			}
+		}
+
+		// CASO NENHUM PROFESSOR ESTEJA SIDO AVALIADO AINDA
+		if (listaProfessoresAvaliados.size() == 0) {
+			return "Nenhum professor foi avaliado ainda";
+		}
+
+		while (true) {
+			double maiorNota = 0;
+			Professor profMaiorNota = new Professor();
+			for (Professor _prof : listaProfessoresAvaliados) {
+				if (_prof.calculaMediaGeral() >= maiorNota) {
+					maiorNota = _prof.calculaMediaGeral();
+					profMaiorNota = _prof;
+				}
+			}
+			ranking += cont++ + "º | " + profMaiorNota.getNome() + " (" + profMaiorNota.getMatricula() + ") " + "Média geral: " + profMaiorNota.calculaMediaGeral() + "\n";
+			if (listaProfessoresAvaliados.size() == 1) { return ranking;}
+			listaProfessoresAvaliados.remove(profMaiorNota);
+
+			
+		}
+
+	}
+	
+	public String dadosPessoais(Aluno alunoLogado) {
+		return 	"Nome: " + alunoLogado.getNome() + "\n" +
+				"Matrícula: " + alunoLogado.getMatricula() + "\n" +
+				"E-mail: " + alunoLogado.getEmail() + "\n" +
+				"Curso: " + alunoLogado.getCurso().getNome();
+	}
+	
+	public boolean contemNumero(String nome) {	
+		for(int n = 0; n <= 9; n++) {
+			if(nome.contains(Integer.toString(n))) return true;
+		}
 		return false;
+
 	}
 
-	// CADASTRA ALUNO
+	public boolean contemLetra(String matricula) {
+		for(char letra = 'a'; letra <= 'z'; letra++) {
+			String letraStr = String.valueOf(letra);
+			if(matricula.contains(letraStr)) {return true;}
+		}
+		return false;
+	}
+	
 	public boolean cadastrarAluno() {
 		try {
 		String nome = JOptionPane.showInputDialog("Nome completo").trim().replaceAll("( +)", " ");
@@ -48,8 +133,9 @@ public class Sistema implements InterfaceSistema {
 
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
-		if(matricula == null || matricula.equals(" "))	 throw new CampoVazio(); 
-		else if(matricula.length() != 8) 				 throw new MatriculaInvalida(); 
+		if(matricula == null || matricula.equals(" "))	throw new CampoVazio(); 
+		else if(matricula.length() != 8) 				throw new MatriculaInvalida(); 
+		else if(contemLetra(matricula))					throw new ContemLetra();
 		for (Aluno _aluno : database.getListaAlunos()) {
 			if (_aluno.getMatricula().equals(matricula)) {
 				JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema");
@@ -78,52 +164,22 @@ public class Sistema implements InterfaceSistema {
 		return true;
 
 		}catch(QuantCaracteres ex){
-			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(ContemEspacos ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(EmailInvalido ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(CampoVazio ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(MatriculaInvalida ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
+			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(ContemNumero ex) {
-			JOptionPane.showMessageDialog(null, ex.getMessage()); return false;
-		} catch(Exception ex) { return false;
+			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
+		}catch(ContemLetra ex) {
+			JOptionPane.showMessageDialog(null, ex.getMessage());	return false;
 		}
 	}
 
-
-	// PROCURA UM PROFESSOR PELO NOME
-	public Professor procurarProfessorPeloNome(String nome) {
-		ArrayList<Professor> profEncontrados = new ArrayList<Professor>();
-		for (Professor _prof : database.getListaProfessores()) {
-			if (_prof.getNome().toUpperCase().contains(nome.toUpperCase())) {
-				profEncontrados.add(_prof);
-			}
-		}
-		
-		if (profEncontrados.size() == 0) { return null; }
-		else if (profEncontrados.size() == 1) {
-			JOptionPane.showMessageDialog(null, "1 professor encontrado \n\n" + profEncontrados.get(0).toString());
-			return profEncontrados.get(0);
-		}
-
-
-		while (true) {
-			
-			Object[] professores = new Object[profEncontrados.size()];
-			for (int k = 0; k < profEncontrados.size(); k++) { professores[k] = profEncontrados.get(k); }
-			Object selectedValue = JOptionPane.showInputDialog(null, profEncontrados.size() 
-					+ " professores encontrados. \nEscolha um:", "Opção", JOptionPane.INFORMATION_MESSAGE, null, professores, professores[0]);
-			return (Professor) selectedValue;
-			
-		
-			}
-	}
-	
-
-	// TESTA SE EXISTE LOGIN NO BANCO DE DAOS
 	public boolean login(String matricula, String senha) {
 		for (Aluno _aluno : database.getListaAlunos()) {
 			if (_aluno.getMatricula().equals(matricula) && _aluno.getSenha().equals(senha)) return true;	
@@ -131,9 +187,41 @@ public class Sistema implements InterfaceSistema {
 		return false;
 	}
 
-	// ALUNO FAZ AVALIAÇÃO DE UM DETERMINADO PROFESSOR
+	public boolean notaValida(double nota) {
+		if (nota < 0 || nota > 10) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean verificaAvaliou(String matricula, Professor prof) {
+		for (Avaliacao _avaliacao : prof.getAvaliacoesRecebidas()) {
+			if (_avaliacao.getAluno().getMatricula().equals(matricula)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-	// verifica se o aluno já avaliou o professor em questão
+	public boolean profAvaliado(Professor _prof) {
+		if (_prof.getAvaliacoesRecebidas().size() == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public void avaliacoesFeitas(Aluno aluno) {
+		ArrayList<Avaliacao> listaAvaliacoes = aluno.getAvaliacoes();
+		if(listaAvaliacoes.size() == 0) {JOptionPane.showMessageDialog(null, "Você ainda não avaliou nenhum professor!"); return;}
+		Object[] professores = new Object[listaAvaliacoes.size()];
+		for (int k = 0; k < listaAvaliacoes.size(); k++) { professores[k] = listaAvaliacoes.get(k).getProfessor(); }
+		Object valorSelecionado = JOptionPane.showInputDialog(null, "Você avaliou "+ listaAvaliacoes.size() + " professor(es).", "Opção", JOptionPane.INFORMATION_MESSAGE, null, professores, professores[0]);
+		Professor prof = (Professor) valorSelecionado;
+		for(Avaliacao avaliacao : listaAvaliacoes) {
+			if(avaliacao.getProfessor().equals(prof)) JOptionPane.showMessageDialog(null, avaliacao.toString());
+		}
+	}
+	
 	public void avaliarProfessor(Aluno _aluno, Professor prof) {
 		while (true) {
 			boolean avaliou = this.verificaAvaliou(_aluno.getMatricula(), prof);
@@ -208,105 +296,6 @@ public class Sistema implements InterfaceSistema {
 
 	}
 
-	// MÉTODO RETORNA O ALUNO LOGADO NO SISTEMA
-	// recebe a mátricula do aluno do tipo String;
-	// testa em cada elemento do tipo Aluno no ArrayList<Aluno> na Database se
-	// getMatricula() equivale a String matricula passada no método;
-	public Aluno alunoLogado(String matricula) {
-		for (Aluno _aluno : database.getListaAlunos()) {
-			if (_aluno.getMatricula().equals(matricula)) {
-				// caso encontre, retorna o Aluno;
-				return _aluno;
-			}
-		}
-		return null;
-	}
-
-	// VERIFICA SE AS NOTAS ATRIBUÍDAS ESTÃO ENTRE 0 E 10
-	public boolean notaValida(double nota) {
-		if (nota < 0 || nota > 10) {
-			return false;
-		}
-		return true;
-
-	}
-	
-	// PRINTA AS AVALIAÇÕES FEITAS PELO ALUNO RECEBIDO NO PARÂMETRO
-	public void avaliacoesFeitas(Aluno aluno) {
-		ArrayList<Avaliacao> listaAvaliacoes = aluno.getAvaliacoes();
-		if(listaAvaliacoes.size() == 0) {JOptionPane.showMessageDialog(null, "Você ainda não avaliou nenhum professor!"); return;}
-		Object[] professores = new Object[listaAvaliacoes.size()];
-		for (int k = 0; k < listaAvaliacoes.size(); k++) { professores[k] = listaAvaliacoes.get(k).getProfessor(); }
-		Object valorSelecionado = JOptionPane.showInputDialog(null, "Você avaliou "+ listaAvaliacoes.size() + " professor(es).", "Opção", JOptionPane.INFORMATION_MESSAGE, null, professores, professores[0]);
-		Professor prof = (Professor) valorSelecionado;
-		for(Avaliacao avaliacao : listaAvaliacoes) {
-			if(avaliacao.getProfessor().equals(prof)) JOptionPane.showMessageDialog(null, avaliacao.toString());
-		}
-	}
-	
-
-	// VERIFICA SE ALUNO JA AVALIOU UM PROFESSOR
-	public boolean verificaAvaliou(String matricula, Professor prof) {
-		for (Avaliacao _avaliacao : prof.getAvaliacoesRecebidas()) {
-			if (_avaliacao.getAluno().getMatricula().equals(matricula)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	// VERIFICA SE UM PROFESSOR TEM ALGUMA AVALIAÇÃO
-	public boolean profAvaliado(Professor _prof) {
-		if (_prof.getAvaliacoesRecebidas().size() == 0) {
-			return false;
-		}
-		return true;
-	}
-
-	// VOLTA UMA STRING CONTENDO O RANKING DOS PROFESSORES
-	public String rankingProfessores() {
-		String ranking = "";
-		int cont = 1;
-		ArrayList<Professor> listaProfessoresAvaliados = new ArrayList<Professor>();
-		for (Professor _prof : database.getListaProfessores()) {
-			if (this.profAvaliado(_prof)) {
-				listaProfessoresAvaliados.add(_prof);
-			}
-		}
-
-		// CASO NENHUM PROFESSOR ESTEJA SIDO AVALIADO AINDA
-		if (listaProfessoresAvaliados.size() == 0) {
-			return "Nenhum professor foi avaliado ainda";
-		}
-
-		while (true) {
-			double maiorNota = 0;
-			Professor profMaiorNota = new Professor();
-			for (Professor _prof : listaProfessoresAvaliados) {
-				if (_prof.calculaMediaGeral() >= maiorNota) {
-					maiorNota = _prof.calculaMediaGeral();
-					profMaiorNota = _prof;
-				}
-			}
-			ranking += cont++ + "º | " + profMaiorNota.getNome() + " (" + profMaiorNota.getMatricula() + ") " + "Média geral: " + profMaiorNota.calculaMediaGeral() + "\n";
-			if (listaProfessoresAvaliados.size() == 1) { return ranking;}
-			listaProfessoresAvaliados.remove(profMaiorNota);
-
-			
-		}
-
-	}
-	
-	// RETORNA UMA LISTA COM OS DADOS PESSOAS DO ALUNO RECEBIDO NO PARÂMETRO
-	public String dadosPessoais(Aluno alunoLogado) {
-		return 	"Nome: " + alunoLogado.getNome() + "\n" +
-				"Matrícula: " + alunoLogado.getMatricula() + "\n" +
-				"E-mail: " + alunoLogado.getEmail() + "\n" +
-				"Curso: " + alunoLogado.getCurso().getNome();
-	}
-	
-	// ATUALIZA A SENHA DO ALUNO RECEBIDO NO PARÂMETRO
-	// O MÉTODO EXIGE A CONFIRMAÇÃO DA SENHA ATUAL PARA PODER PROSSEGUIR PARA A ATTUALIZAÇÃO DA SENHA
 	public void atualizarSenha(Aluno alunoLogado) {
 		String confirmarSenha = JOptionPane.showInputDialog("Confirme sua senha atual");
 		if(!confirmarSenha.equals(alunoLogado.getSenha())) {JOptionPane.showMessageDialog(null, "A senha não confere!"); return;}
@@ -325,9 +314,6 @@ public class Sistema implements InterfaceSistema {
 		}
 	}
 	
-	
-	// ATUALIZA O E-MAIL DO ALUNO RECEBIDO NO PARÂMETRO
-	// O SISTEMA EXIGE QUE O ALUNO FORNEÇA UM E-MAIL VÁLIDO
 	public void atualizarEmail(Aluno alunoLogado) {
 		try {
 			String novoEmail = JOptionPane.showInputDialog("Novo e-mail").trim().replaceAll("( +)", "");
