@@ -16,7 +16,7 @@ import exceptions.EmailIgual;
 import exceptions.EmailInvalido;
 import exceptions.MatriculaInvalida;
 import exceptions.NotaInvalida;
-import exceptions.QuantCaracteres;
+import exceptions.QuantChars;
 import exceptions.SenhaIgual;
 import interfaces.InterfaceSistema;
 
@@ -127,7 +127,7 @@ public class Sistema implements InterfaceSistema {
 		String nome = JOptionPane.showInputDialog("Nome completo").trim().replaceAll("( +)", " ");
 		if(contemNumero(nome))					 throw new ContemNumero();
 		if(nome == null || nome.equals(" "))	 throw new CampoVazio();
-		else if(nome.length() < 10) 			 throw new QuantCaracteres("O nome", 10); 
+		else if(nome.length() < 10) 			 throw new QuantChars("O nome", 10); 
 
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
@@ -151,7 +151,7 @@ public class Sistema implements InterfaceSistema {
 		
 
 		String senha = JOptionPane.showInputDialog("Senha de acesso (mín. 6 caracteres)");
-		if(senha.length() < 6) 						 throw new QuantCaracteres("A senha", 6); 
+		if(senha.length() < 6) 						 throw new QuantChars("A senha", 6); 
 		else if(senha.contains(" ")) 				 throw new ContemEspacos("A senha"); 
 		else if(senha == null || senha.equals(" "))  throw new CampoVazio(); 
 
@@ -161,7 +161,7 @@ public class Sistema implements InterfaceSistema {
 		curso.adicionarAluno(aluno);
 		return true;
 
-		}catch(QuantCaracteres ex){
+		}catch(QuantChars ex){
 			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(ContemEspacos ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
@@ -300,12 +300,12 @@ public class Sistema implements InterfaceSistema {
 		
 		try {
 			String novaSenha = JOptionPane.showInputDialog("Nova senha").trim().replaceAll("( +)", "");
-			if(novaSenha.length() < 6) 							throw new QuantCaracteres("A senha", 6); 
+			if(novaSenha.length() < 6) 							throw new QuantChars("A senha", 6); 
 			else if(novaSenha.equals(alunoLogado.getSenha())) 	throw new SenhaIgual();
 			else alunoLogado.setSenha(novaSenha); JOptionPane.showMessageDialog(null, "Senha alterada com sucesso\n"
 																					+ "Sua nova senha é: " + novaSenha);
 			
-		}catch(QuantCaracteres ex) {
+		}catch(QuantChars ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());
 		}catch(SenhaIgual ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());

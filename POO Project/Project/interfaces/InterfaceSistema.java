@@ -17,6 +17,8 @@ public interface InterfaceSistema {
 	public boolean notaValida(double nota);
 	public boolean verificaAvaliou(String matricula, Professor prof);
 	public boolean profAvaliado(Professor _prof);
+	public boolean contemNumero(String nome);
+	public boolean contemLetra(String matricula);
 	public void avaliarProfessor(Aluno _aluno, Professor prof);
 	public void atualizarSenha(Aluno alunoLogado);
 	public void atualizarEmail(Aluno alunoLogado);
