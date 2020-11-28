@@ -12,24 +12,11 @@ public class Menus implements InterfaceMenus {
 	public static final String ERRO_OPCAO_INVALIDA = "Opção inválida!";
 	
 	public int menuPrincipal(){
-		while(true) {
-			try {
-			int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"1. LOGAR NO SISTEMA \n" +
-																		"2. SE CADASTRAR \n"+
-																		"3. FECHAR PROGRAMA"));
-				
-				if( opcao < 1 || opcao > 3) {
-					throw new OpcaoInvalida();
-				} return opcao;
-				
-			}catch (OpcaoInvalida ex) {
-				JOptionPane.showMessageDialog(null, ex.getMessage());
-			}catch(NumberFormatException ex) {
-				JOptionPane.showMessageDialog(null, ERRO_OPCAO_INVALIDA);
-			}
-			
-			}
-		
+		Object[] options = { "ENTRAR", "SE CADASTRAR"};
+		int op = JOptionPane.showOptionDialog(null, "Teacher Evaluation System", "Bem vindo!", JOptionPane.DEFAULT_OPTION, 1, null, options, options[0]);
+		if		(op+1 == 1) 	return 1;
+		else if	(op+1 == 2) 	return 2;
+		else 					return 3;
 	}
 	
 	public int menuSecundario(Aluno _alunoLogado){

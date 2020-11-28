@@ -19,8 +19,8 @@ public class Principal {
 			int opcao = menu.menuPrincipal();
 
 			if (opcao == 1) {
-				String matricula = JOptionPane.showInputDialog("Matrícula");
-				String senha = JOptionPane.showInputDialog("Senha");
+				String matricula = JOptionPane.showInputDialog("Matrícula"); 	if(matricula == null)	continue;
+				String senha = JOptionPane.showInputDialog("Senha"); 			if(senha == null) 		continue;
 				boolean logou = sistema.login(matricula, senha);		
 			
 				if (logou) { 						

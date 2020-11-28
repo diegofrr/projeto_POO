@@ -175,6 +175,7 @@ public class Sistema implements InterfaceSistema {
 			JOptionPane.showMessageDialog(null, ex.getMessage()); 	return false;
 		}catch(ContemLetra ex) {
 			JOptionPane.showMessageDialog(null, ex.getMessage());	return false;
+		}catch(Exception ex) {										return false;
 		}
 	}
 
