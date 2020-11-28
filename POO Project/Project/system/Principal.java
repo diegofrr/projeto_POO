@@ -25,7 +25,7 @@ public class Principal {
 			
 				if (logou) { 						
 					Aluno _alunoLogado = sistema.alunoLogado(matricula);
-					JOptionPane.showMessageDialog(null, "Bem vindo, " + _alunoLogado.getNome().split(" ")[0] + "!");
+					JOptionPane.showMessageDialog(null, "Olá, " + _alunoLogado.getNome().split(" ")[0] + "! :)");
 
 					// DEPOIS DO ALUNO LOGAR NO SISTEMA
 					while (true) {
@@ -35,7 +35,8 @@ public class Principal {
 							
 							try {
 								String nome = JOptionPane.showInputDialog("Nome do professor");
-								if(nome == null || nome.equals("") || nome.equals(" ")) {throw new CampoVazio(); }
+								if(nome == null) { continue; }
+								else if(nome.equals("") || nome.equals(" ")) {throw new CampoVazio(); }
 								Professor _prof = sistema.procurarProfessorPeloNome(nome);
 								
 								if (_prof == null) {
@@ -54,7 +55,9 @@ public class Principal {
 						} else if (op == 2) {
 							try {
 								String nome = JOptionPane.showInputDialog("Nome do professor");
-								if(nome == null || nome.equals(" ")) { throw new CampoVazio(); }
+								if(nome == null) {continue;}
+								nome = nome.trim().replaceAll("( +)", " ");
+								if(nome.equals(""))  { throw new CampoVazio(); }
 								Professor _prof = sistema.procurarProfessorPeloNome(nome);
 								
 								if (_prof == null) {
@@ -89,13 +92,15 @@ public class Principal {
 									 	
 
 						} else if (op == 3) {
+							while(true) {
 							Curso _cursoAcessado = sistema.escolherCurso();
-							if (_cursoAcessado == null) continue;
+							if (_cursoAcessado == null) break;
 							while(true) {
 							int opcaoCurso = menu.menuAcessarCurso(_cursoAcessado);
 							if		(opcaoCurso == 1) 	JOptionPane.showMessageDialog(null, sistema.database.listarProfessoresDeCurso(_cursoAcessado));
 							else if	(opcaoCurso == 2) 	JOptionPane.showMessageDialog(null, sistema.database.listarAlunosDeCurso(_cursoAcessado));	
-							else if	(opcaoCurso == 3)	break;
+							else if	(opcaoCurso == 3) break;
+							}
 							}
 							
 						} else if (op == 4) {

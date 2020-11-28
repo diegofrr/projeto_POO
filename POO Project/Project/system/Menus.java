@@ -12,8 +12,8 @@ public class Menus implements InterfaceMenus {
 	public static final String ERRO_OPCAO_INVALIDA = "Opção inválida!";
 	
 	public int menuPrincipal(){
-		Object[] options = { "ENTRAR", "SE CADASTRAR"};
-		int op = JOptionPane.showOptionDialog(null, "Teacher Evaluation System", "Bem vindo!", JOptionPane.DEFAULT_OPTION, 1, null, options, options[0]);
+		Object[] opcoes = { "FAZER LOGIN", "SE CADASTRAR"};
+		int op = JOptionPane.showOptionDialog(null, "Bem-vindo!", "OpUnion", JOptionPane.DEFAULT_OPTION, 1, null, opcoes, opcoes[0]);
 		if		(op+1 == 1) 	return 1;
 		else if	(op+1 == 2) 	return 2;
 		else 					return 3;
@@ -22,7 +22,7 @@ public class Menus implements InterfaceMenus {
 	public int menuSecundario(Aluno _alunoLogado){
 		while(true) {
 			try {
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome().split(" ")[0] + " ("+ _alunoLogado.getMatricula() +")\n\n" +
+				String opcao = JOptionPane.showInputDialog(	"• " + _alunoLogado.getNome().split(" ")[0] + " ("+ _alunoLogado.getMatricula() +")\n\n" +
 
 													"1. AVALIAR PROFESSOR \n"+
 													"2. VER ESTATÍSTICAS DE UM PROFESSOR \n"+
@@ -30,11 +30,14 @@ public class Menus implements InterfaceMenus {
 													"4. LISTAR PROFESSORES \n" +
 													"5. LISTAR CURSOS \n"+
 													"6. RANKING DOS PROFESSORES \n" +
-													"7. MEUS DADOS \n" +
-													"8. DESLOGAR"));
-				if (opcao < 1 || opcao > 8) {
+													"7. MEUS DADOS \n\n" +
+													"CLIQUE EM CANCELAR PARA SAIR");
+				
+				if (opcao == null) { return 8;}
+				int opcaoInt = Integer.parseInt(opcao);
+				if (opcaoInt < 1 || opcaoInt > 7) {
 					throw new OpcaoInvalida();
-				} return opcao;
+				} return opcaoInt;
 				
 				
 			} catch ( OpcaoInvalida ex){
@@ -53,14 +56,17 @@ public class Menus implements InterfaceMenus {
 	public int menuAcessarCurso(Curso _cursoAcessado){
 		while(true) {
 			try {
-				int opcao = Integer.parseInt(JOptionPane.showInputDialog("Curso: " + _cursoAcessado.getNome() + "\n\n" +
+				String opcao = JOptionPane.showInputDialog("Curso: " + _cursoAcessado.getNome() + "\n\n" +
 
 													"1. LISTAR PROFESSORES \n"+
-													"2. LISTAR ALUNOS \n"+
-													"3. VOLTAR AO MENU PRINCIPAL"));
-				if (opcao < 1 || opcao > 3) {
+													"2. LISTAR ALUNOS \n\n"+
+													"CLIQUE EM CANCELAR PARA VOLTAR");
+				if(opcao == null) {return 3;}
+				int opcaoInt = Integer.parseInt(opcao);
+				
+				if (opcaoInt < 1 || opcaoInt > 2) {
 					throw new OpcaoInvalida();
-				} return opcao;
+				} return opcaoInt;
 				
 				
 			} catch ( OpcaoInvalida ex){

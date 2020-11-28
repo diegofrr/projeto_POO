@@ -43,7 +43,7 @@ public class Sistema implements InterfaceSistema {
 		
 		if (profEncontrados.size() == 0) { return null; }
 		else if (profEncontrados.size() == 1) {
-			JOptionPane.showMessageDialog(null, "1 professor encontrado \n\n" + profEncontrados.get(0).toString());
+			JOptionPane.showMessageDialog(null, "1 professor encontrado: \n\n" + profEncontrados.get(0).toString());
 			return profEncontrados.get(0);
 		}
 
@@ -95,8 +95,7 @@ public class Sistema implements InterfaceSistema {
 			ranking += cont++ + "º | " + profMaiorNota.getNome() + " (" + profMaiorNota.getMatricula() + ") " + "Média geral: " + profMaiorNota.calculaMediaGeral() + "\n";
 			if (listaProfessoresAvaliados.size() == 1) { return ranking;}
 			listaProfessoresAvaliados.remove(profMaiorNota);
-
-			
+	
 		}
 
 	}
@@ -297,7 +296,8 @@ public class Sistema implements InterfaceSistema {
 
 	public void atualizarSenha(Aluno alunoLogado) {
 		String confirmarSenha = JOptionPane.showInputDialog("Confirme sua senha atual");
-		if(!confirmarSenha.equals(alunoLogado.getSenha())) {JOptionPane.showMessageDialog(null, "A senha não confere!"); return;}
+		if(confirmarSenha == null) return;
+		else if(!confirmarSenha.equals(alunoLogado.getSenha())) {JOptionPane.showMessageDialog(null, "A senha não confere!"); return;}
 		
 		try {
 			String novaSenha = JOptionPane.showInputDialog("Nova senha").trim().replaceAll("( +)", "");
@@ -328,7 +328,7 @@ public class Sistema implements InterfaceSistema {
 			JOptionPane.showMessageDialog(null, ex.getMessage());
 		}catch(EmailInvalido ex){
 			JOptionPane.showMessageDialog(null, ex.getMessage());
-		}
+		}catch(Exception ex) {}
 	}
 
 
