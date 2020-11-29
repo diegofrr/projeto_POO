@@ -24,5 +24,4 @@ public interface InterfaceSistema {
 	public void atualizarEmail(Aluno alunoLogado);
 	public void avaliacoesFeitas(Aluno aluno);
 
-
 }

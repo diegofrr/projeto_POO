@@ -68,7 +68,6 @@ public class Database implements InterfaceDatabase {
 			listaProfessores.add(_professor5);
 	
 			
-			
 			///////////CADASTRAR ALUNO PARA TESTAR O SISTEMA
 			Aluno _aluno = new Aluno("Diêgo Raian da Silva Ferreira", "000", "diego@gmail.com", "admin123",cursoSI);
 			this.listaAlunos.add(_aluno);

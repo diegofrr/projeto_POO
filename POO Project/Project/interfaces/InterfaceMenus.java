@@ -11,4 +11,5 @@ public interface InterfaceMenus {
 	public int menuPrincipal() throws OpcaoInvalida;
 	public int menuEstatisticasProfessor();
 	public int menuMeusDados();
+	
 }

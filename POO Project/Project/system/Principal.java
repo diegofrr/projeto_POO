@@ -14,12 +14,6 @@ public class Principal {
 		Menus menu = new Menus();		
 		
 		while (true) {
-			
-			String nome2 = "diego raian da silva ferreira";
-			sistema.formatarNome(nome2);
-			
-			
-			
 			int opcao = menu.menuPrincipal();		
 
 			if (opcao == 1) {
@@ -31,7 +25,6 @@ public class Principal {
 					Aluno _alunoLogado = sistema.alunoLogado(matricula);
 					JOptionPane.showMessageDialog(null, "Olá, " + _alunoLogado.getNome().split(" ")[0] + "! :)");
 
-					// DEPOIS DO ALUNO LOGAR NO SISTEMA
 					while (true) {
 						int op = menu.menuSecundario(_alunoLogado);
 

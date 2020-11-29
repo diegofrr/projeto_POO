@@ -38,7 +38,6 @@ public class Menus implements InterfaceMenus {
 				if (opcaoInt < 1 || opcaoInt > 7) { throw new OpcaoInvalida(); } 
 				return opcaoInt;
 				
-				
 			} catch ( OpcaoInvalida ex){
 				JOptionPane.showMessageDialog(null, ex.getMessage());
 			

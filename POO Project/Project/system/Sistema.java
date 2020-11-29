@@ -37,6 +37,7 @@ public class Sistema implements InterfaceSistema {
 			if (_prof.getNome().toUpperCase().contains(nome.toUpperCase())) {
 				profEncontrados.add(_prof);
 			}
+	
 		}
 		
 		if (profEncontrados.size() == 0) { return null; }
