@@ -2,7 +2,6 @@ package system;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 import classes.Aluno;
 import classes.Avaliacao;
 import classes.Curso;
@@ -26,7 +25,6 @@ public class Sistema implements InterfaceSistema {
 	public Aluno alunoLogado(String matricula) {
 		for (Aluno _aluno : database.getListaAlunos()) {
 			if (_aluno.getMatricula().equals(matricula)) {
-				// caso encontre, retorna o Aluno;
 				return _aluno;
 			}
 		}
@@ -67,7 +65,7 @@ public class Sistema implements InterfaceSistema {
 		Object valorSelecionado = JOptionPane.showInputDialog(null, "Curso", "Opção", JOptionPane.INFORMATION_MESSAGE, null, cursos, cursos[0]);
 		return (Curso) valorSelecionado;	
 	}
-
+	
 	public String rankingProfessores() {
 		String ranking = "";
 		int cont = 1;
@@ -107,6 +105,16 @@ public class Sistema implements InterfaceSistema {
 				"Curso: " + alunoLogado.getCurso().getNome();
 	}
 	
+	public String formatarNome(String nome) {
+		String[] nomeList = nome.split(" ");
+		nome = "";
+		for(String n : nomeList) {
+			n = n.substring(0,1).toUpperCase().concat(n.substring(1));
+			nome += n + " ";
+		}
+		return nome;
+	}
+	
 	public boolean contemNumero(String nome) {	
 		for(int n = 0; n <= 9; n++) {
 			if(nome.contains(Integer.toString(n))) return true;
@@ -127,7 +135,7 @@ public class Sistema implements InterfaceSistema {
 		if(contemNumero(nome))					 throw new ContemNumero();
 		if(nome == null || nome.equals(" "))	 throw new CampoVazio();
 		else if(nome.length() < 10) 			 throw new QuantChars("O nome", 10); 
-
+		nome = formatarNome(nome);
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
 		if(matricula == null || matricula.equals(" "))	throw new CampoVazio(); 
@@ -140,13 +148,19 @@ public class Sistema implements InterfaceSistema {
 			}
 		}
 		
-		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "");
+		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "").toLowerCase();
 		if(email == null || email.equals(" "))	 	throw new CampoVazio(); 
 		else if(email.contains(" "))			 	throw new ContemEspacos("O e-mail"); 
 		else if(!email.contains("@gmail.com") 	&&
 				!email.contains("@outlook.com") &&
 				!email.contains("@hotmail.com") &&
-				!email.contains("@dcx.ufpb.br"))	throw new EmailInvalido(email); 
+				!email.contains("@dcx.ufpb.br"))	throw new EmailInvalido(email);
+		for(Aluno _aluno : database.getListaAlunos()) {
+			if(_aluno.getEmail().toLowerCase().equals(email)) {
+				JOptionPane.showMessageDialog(null, "E-mail já em uso");
+				return false;
+			}
+		}
 		
 
 		String senha = JOptionPane.showInputDialog("Senha de acesso (mín. 6 caracteres)");
@@ -224,8 +238,6 @@ public class Sistema implements InterfaceSistema {
 		while (true) {
 			boolean avaliou = this.verificaAvaliou(_aluno.getMatricula(), prof);
 
-			// caso já tenha avaliado, é printada uma mensagem de aviso e aplicado um break
-			// para finalizar o laço, encerrando também o método
 			if (avaliou) {
 				JOptionPane.showMessageDialog(null, "Você já avaliou este professor!");
 				break;
@@ -315,13 +327,19 @@ public class Sistema implements InterfaceSistema {
 	
 	public void atualizarEmail(Aluno alunoLogado) {
 		try {
-			String novoEmail = JOptionPane.showInputDialog("Novo e-mail").trim().replaceAll("( +)", "");
+			String novoEmail = JOptionPane.showInputDialog("Novo e-mail").trim().replaceAll("( +)", "").toLowerCase();
 			if(novoEmail.equals(alunoLogado.getEmail())) throw new EmailIgual();
 			else if(!novoEmail.contains("@gmail.com") 	&&
 					!novoEmail.contains("@outlook.com") &&
 					!novoEmail.contains("@hotmail.com") &&
 					!novoEmail.contains("@dcx.ufpb.br")) throw new EmailInvalido(novoEmail);
-			else alunoLogado.setEmail(novoEmail); JOptionPane.showMessageDialog(null, "E-mail alterado com sucesso\n" 
+			for(Aluno a : database.getListaAlunos()) {
+				if(a.getEmail().equals(novoEmail)) {
+					JOptionPane.showMessageDialog(null, "E-mail já em uso");
+					return;
+				}
+			}
+			alunoLogado.setEmail(novoEmail); JOptionPane.showMessageDialog(null, "E-mail alterado com sucesso\n" 
 																					+ "Seu novo e-mail é: " + novoEmail);
 		
 		}catch(EmailIgual ex) {

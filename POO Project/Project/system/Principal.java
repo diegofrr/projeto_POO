@@ -1,8 +1,6 @@
 package system;
 
-
 import javax.swing.JOptionPane;
-
 import classes.Aluno;
 import classes.Curso;
 import classes.Professor;
@@ -13,10 +11,16 @@ public class Principal {
 
 	public static void main(String[] args) throws OpcaoInvalida {
 		Sistema sistema = new Sistema();
-		Menus menu = new Menus();
+		Menus menu = new Menus();		
 		
 		while (true) {
-			int opcao = menu.menuPrincipal();
+			
+			String nome2 = "diego raian da silva ferreira";
+			sistema.formatarNome(nome2);
+			
+			
+			
+			int opcao = menu.menuPrincipal();		
 
 			if (opcao == 1) {
 				String matricula = JOptionPane.showInputDialog("Matrícula"); 	if(matricula == null)	continue;
@@ -139,9 +143,7 @@ public class Principal {
 								
 							}
 							
-						}
-						
-						else if (op == 8){
+						}else if (op == 8){
 							break;
 						}
 					}
