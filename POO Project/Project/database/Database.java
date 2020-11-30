@@ -59,7 +59,7 @@ public class Database implements InterfaceDatabase {
 			
 			//PROFESSOR 4:
 			cursos = new ArrayList<Curso>(Arrays.asList(cursoMatematica));
-			Professor _professor4 = new Professor("Joseilme Fernanes Gouveia", "20160138339", "joseilme.fernandes@dcx.ufpb.br", cursos);
+			Professor _professor4 = new Professor("José Feliciano Pontes", "20160138339", "jose.feliciano@dcx.ufpb.br", cursos);
 			for (Curso c : cursos) { c.adicionarProfessor(_professor4); }
 			listaProfessores.add(_professor4);
 			
@@ -122,7 +122,7 @@ public class Database implements InterfaceDatabase {
 		
 		public String listarProfessoresDeCurso(Curso _curso) {
 			if (_curso.getListaProfessores().size() == 0) return "Nenhum professor cadastrado neste curso";
-			String lista = "";
+			String lista = _curso.getListaProfessores().size() + " professor(es) cadastrado(s)\n\n";
 			for(Professor _prof : _curso.getListaProfessores()) {
 				lista += _prof.toStringAll() ;
 			}
@@ -130,7 +130,7 @@ public class Database implements InterfaceDatabase {
 		}
 		
 		public String listarProfessores() {
-			String lista = "";
+			String lista = getListaProfessores().size() + " professores cadastrados\n\n";
 			for(Professor _prof : getListaProfessores()) {
 				lista += _prof.toStringAll() ;
 			}

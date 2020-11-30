@@ -24,9 +24,7 @@ public class Sistema implements InterfaceSistema {
 	
 	public Aluno alunoLogado(String matricula) {
 		for (Aluno _aluno : database.getListaAlunos()) {
-			if (_aluno.getMatricula().equals(matricula)) {
-				return _aluno;
-			}
+			if (_aluno.getMatricula().equals(matricula))	return _aluno;
 		}
 		return null;
 	}
@@ -37,7 +35,6 @@ public class Sistema implements InterfaceSistema {
 			if (_prof.getNome().toUpperCase().contains(nome.toUpperCase())) {
 				profEncontrados.add(_prof);
 			}
-	
 		}
 		
 		if (profEncontrados.size() == 0) { return null; }
@@ -133,9 +130,9 @@ public class Sistema implements InterfaceSistema {
 	public boolean cadastrarAluno() {
 		try {
 		String nome = JOptionPane.showInputDialog("Nome completo").trim().replaceAll("( +)", " ");
-		if(contemNumero(nome))					 throw new ContemNumero();
-		if(nome == null || nome.equals(" "))	 throw new CampoVazio();
-		else if(nome.length() < 10) 			 throw new QuantChars("O nome", 10); 
+		if(contemNumero(nome))					throw new ContemNumero();
+		if(nome == null || nome.equals(" "))	throw new CampoVazio();
+		else if(nome.length() < 10) 			throw new QuantChars("O nome", 10); 
 		nome = formatarNome(nome);
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
@@ -204,9 +201,7 @@ public class Sistema implements InterfaceSistema {
 	}
 
 	public boolean notaValida(double nota) {
-		if (nota < 0 || nota > 10) {
-			return false;
-		}
+		if (nota < 0 || nota > 10) return false;
 		return true;
 	}
 	
