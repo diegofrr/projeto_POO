@@ -9,7 +9,7 @@ public class MatriculaInvalida extends Exception {
 	
 	public MatriculaInvalida() {
 		super();
-		this.msg = "A matrícula precisa ter 8 caracteres";
+		this.msg = "A matrícula precisa ter 11 caracteres";
 	}
 
 	public String getMessage() { return this.msg; }

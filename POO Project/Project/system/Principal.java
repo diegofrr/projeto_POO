@@ -6,6 +6,7 @@ import classes.Curso;
 import classes.Professor;
 import exceptions.CampoVazio;
 import exceptions.OpcaoInvalida;
+import exceptions.QuantChars;
 
 public class Principal {
 
@@ -32,8 +33,10 @@ public class Principal {
 							
 							try {
 								String nome = JOptionPane.showInputDialog("Nome do professor");
+								nome = nome.trim().replaceAll("( +)", " ");
 								if(nome == null) { continue; }
 								else if(nome.equals("") || nome.equals(" ")) {throw new CampoVazio(); }
+								else if(nome.length() < 3) { throw new QuantChars("A busca", 3);} 
 								Professor _prof = sistema.procurarProfessorPeloNome(nome);
 								
 								if (_prof == null) {
@@ -44,6 +47,8 @@ public class Principal {
 								}
 								
 							}catch(CampoVazio ex){
+								JOptionPane.showMessageDialog(null, ex.getMessage());
+							}catch(QuantChars ex) {
 								JOptionPane.showMessageDialog(null, ex.getMessage());
 							}
 	

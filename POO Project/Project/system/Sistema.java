@@ -140,14 +140,16 @@ public class Sistema implements InterfaceSistema {
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
 		if(matricula == null || matricula.equals(" "))	throw new CampoVazio(); 
-		else if(matricula.length() != 8) 				throw new MatriculaInvalida(); 
+		else if(matricula.length() != 11) 				throw new MatriculaInvalida(); 
 		else if(contemLetra(matricula))					throw new ContemLetra();
 		for (Aluno _aluno : database.getListaAlunos()) {
-			if (_aluno.getMatricula().equals(matricula)) {
-				JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema");
-				return false;
-			}
-		}
+			if (_aluno.getMatricula().equals(matricula)) 
+				{ JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema"); return false; }}
+		
+		for(Professor _prof : database.getListaProfessores()) {
+			if(_prof.getMatricula().equals(matricula)) 
+				{ JOptionPane.showMessageDialog(null, "Esta matrícula pertence à um professor"); return false; }}
+		
 		
 		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "").toLowerCase();
 		if(email == null || email.equals(" "))	 	throw new CampoVazio(); 
@@ -156,12 +158,13 @@ public class Sistema implements InterfaceSistema {
 				!email.contains("@outlook.com") &&
 				!email.contains("@hotmail.com") &&
 				!email.contains("@dcx.ufpb.br"))	throw new EmailInvalido(email);
-		for(Aluno _aluno : database.getListaAlunos()) {
-			if(_aluno.getEmail().toLowerCase().equals(email)) {
-				JOptionPane.showMessageDialog(null, "E-mail já em uso");
-				return false;
-			}
-		}
+		for(Aluno a : database.getListaAlunos()) {
+			if(a.getEmail().equals(email)) {
+				JOptionPane.showMessageDialog(null, "E-mail já em uso"); return false; }}
+		
+		for(Professor a : database.getListaProfessores()) {
+			if(a.getEmail().equals(email)) {
+				JOptionPane.showMessageDialog(null, "Este e-mail pertence à um professor"); return false; }}
 		
 
 		String senha = JOptionPane.showInputDialog("Senha de acesso (mín. 6 caracteres)");
@@ -336,10 +339,12 @@ public class Sistema implements InterfaceSistema {
 					!novoEmail.contains("@dcx.ufpb.br")) throw new EmailInvalido(novoEmail);
 			for(Aluno a : database.getListaAlunos()) {
 				if(a.getEmail().equals(novoEmail)) {
-					JOptionPane.showMessageDialog(null, "E-mail já em uso");
-					return;
-				}
-			}
+					JOptionPane.showMessageDialog(null, "E-mail já em uso"); return; }}
+			
+			for(Professor a : database.getListaProfessores()) {
+				if(a.getEmail().equals(novoEmail)) {
+					JOptionPane.showMessageDialog(null, "Este e-mail pertence à um professor"); return; }}
+			
 			alunoLogado.setEmail(novoEmail); JOptionPane.showMessageDialog(null, "E-mail alterado com sucesso\n" 
 																					+ "Seu novo e-mail é: " + novoEmail);
 		
