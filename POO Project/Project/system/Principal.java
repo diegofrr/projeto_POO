@@ -50,9 +50,7 @@ public class Principal {
 								JOptionPane.showMessageDialog(null, ex.getMessage());
 							}catch(QuantChars ex) {
 								JOptionPane.showMessageDialog(null, ex.getMessage());
-							}
-	
-							
+							}	
 
 						} else if (op == 2) {
 							try {
@@ -78,15 +76,10 @@ public class Principal {
 									int option = JOptionPane.showConfirmDialog(null, "O professor, " + _prof.getNome()
 									+ ", ainda não foi avaliado. Deseja avaliá-lo agora? :)", null , JOptionPane.YES_NO_OPTION);
 									
-									if (option == 0) {
-										sistema.avaliarProfessor(_alunoLogado, _prof);
-
-									} else {
-										continue;
-									}
-								}
-								
-								
+									if (option == 0) sistema.avaliarProfessor(_alunoLogado, _prof);
+									else continue;
+									
+								}	
 								
 							}catch(CampoVazio ex) {
 								JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -123,22 +116,11 @@ public class Principal {
 							while(true) {
 							
 							int opcaoDados = menu.menuMeusDados();
-							if(opcaoDados == 1) { 
-								JOptionPane.showMessageDialog(null, sistema.dadosPessoais(_alunoLogado));
-							} else if(opcaoDados == 2) {
-								sistema.avaliacoesFeitas(_alunoLogado);
-							
-							} else if(opcaoDados == 3) {
-								sistema.atualizarSenha(_alunoLogado);
-								
-							} else if(opcaoDados == 4) {
-								sistema.atualizarEmail(_alunoLogado);
-							}
-							
-							
-							else if(opcaoDados == 5){ break; }
-								
-								
+							if(opcaoDados == 1) JOptionPane.showMessageDialog(null, sistema.dadosPessoais(_alunoLogado));
+							else if(opcaoDados == 2) sistema.avaliacoesFeitas(_alunoLogado);
+							else if(opcaoDados == 3) sistema.atualizarSenha(_alunoLogado);
+							else if(opcaoDados == 4) sistema.atualizarEmail(_alunoLogado);
+							else if(opcaoDados == 5) break;
 							}
 							
 						}else if (op == 8){
@@ -152,9 +134,7 @@ public class Principal {
 
 			} else if (opcao == 2) {
 				boolean cadastrou = sistema.cadastrarAluno();
-				if (cadastrou) {
-					JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-				}
+				if (cadastrou) JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
 
 			} else {
 				break;
