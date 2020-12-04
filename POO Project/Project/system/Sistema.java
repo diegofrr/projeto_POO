@@ -149,8 +149,9 @@ public class Sistema implements InterfaceSistema {
 		
 		
 		String email = JOptionPane.showInputDialog("E-mail").trim().replaceAll("( +)", "").toLowerCase();
-		if(email == null || email.equals(" "))	 	throw new CampoVazio(); 
-		else if(email.contains(" "))			 	throw new ContemEspacos("O e-mail"); 
+		if(email == null || email.equals(" "))	 						throw new CampoVazio(); 
+		else if(email.contains(" "))			 						throw new ContemEspacos("O e-mail"); 
+		else if(this.contemNumero(Character.toString(email.charAt(0))))	throw new EmailInvalido(email);
 		else if(!email.contains("@gmail.com") 	&&
 				!email.contains("@outlook.com") &&
 				!email.contains("@hotmail.com") &&
@@ -327,7 +328,8 @@ public class Sistema implements InterfaceSistema {
 	public void atualizarEmail(Aluno alunoLogado) {
 		try {
 			String novoEmail = JOptionPane.showInputDialog("Novo e-mail").trim().replaceAll("( +)", "").toLowerCase();
-			if(novoEmail.equals(alunoLogado.getEmail())) throw new EmailIgual();
+			if(novoEmail.equals(alunoLogado.getEmail())) 						throw new EmailIgual();
+			else if(this.contemNumero(Character.toString(novoEmail.charAt(0)))) throw new EmailInvalido(novoEmail);
 			else if(!novoEmail.contains("@gmail.com") 	&&
 					!novoEmail.contains("@outlook.com") &&
 					!novoEmail.contains("@hotmail.com") &&
