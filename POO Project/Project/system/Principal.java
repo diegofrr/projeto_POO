@@ -12,7 +12,7 @@ public class Principal {
 
 	public static void main(String[] args) throws OpcaoInvalida {
 		Sistema sistema = new Sistema();
-		Menus menu = new Menus();		
+		Menus menu = new Menus();
 		
 		while (true) {
 			int opcao = menu.menuPrincipal();		

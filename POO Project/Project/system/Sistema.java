@@ -136,9 +136,9 @@ public class Sistema implements InterfaceSistema {
 		nome = formatarNome(nome);
 
 		String matricula = JOptionPane.showInputDialog("Matrícula").trim().replaceAll("( +)", "");
-		if(matricula == null || matricula.equals(" "))	throw new CampoVazio(); 
-		else if(matricula.length() != 11) 				throw new MatriculaInvalida(); 
-		else if(contemLetra(matricula))					throw new ContemLetra();
+		if(matricula == null || matricula.equals(" "))					throw new CampoVazio(); 
+		else if(matricula.length() != 8 && matricula.length() != 11) 	throw new MatriculaInvalida(); 
+		else if(contemLetra(matricula))									throw new ContemLetra();
 		for (Aluno _aluno : database.getListaAlunos()) {
 			if (_aluno.getMatricula().equals(matricula)) 
 				{ JOptionPane.showMessageDialog(null, "Matrícula já cadastrada no sistema"); return false; }}
